@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+"use client";
+
+import React from "react";
 import { useDataContext } from "@/app/dashboard/DataProvider";
 import Swimlane from "@/app/dashboard/Swimlane";
 import CreateCard from "@/app/dashboard/CreateCard";
@@ -6,58 +8,43 @@ import { ICard } from "@/app/dashboard/ICard";
 import Card from "@/app/dashboard/CardComponent"; // Import the updated Card component
 
 const CardPool: React.FC = () => {
-  const { cards, updateCard, activeSubcategory } = useDataContext();
-  const [swimLanes, setSwimLanes] = useState<string[]>(["Swimlane 1", "Swimlane 2"]);
+  const { cards, activeCategory, activeSubcategory } = useDataContext();
 
+  // Filter cards based on the active subcategory
   const filteredCards = cards.filter(
     (card) => card.subCategory === activeSubcategory
   );
 
+  // Derive swimlanes dynamically based on the cards' swimLane property
   const swimLaneGroups = filteredCards.reduce((acc, card) => {
     acc[card.swimLane] = acc[card.swimLane] || [];
     acc[card.swimLane].push(card);
     return acc;
   }, {} as Record<string, ICard[]>);
 
-  const handleAddSwimlane = () => {
-    const newSwimlaneName = `Swimlane ${swimLanes.length + 1}`;
-    setSwimLanes([...swimLanes, newSwimlaneName]);
-  };
-
-  const handleEditCard = (id: string) => {
-    console.log(`Edit card ${id}`);
-  };
-
-  const handleDeleteCard = (id: string) => {
-    console.log(`Delete card ${id}`);
-  };
-
   return (
     <div className="p-4 h-full">
+      {/* Active Subcategory Header */}
       {activeSubcategory && (
         <div className="text-center text-lg font-semibold mb-6">
           {activeSubcategory}
         </div>
       )}
-        <div className="h-full w-full overflow-x-auto flex space-x-4 pb-8">
-        {swimLanes.map((swimLane) => (
-          <Swimlane
-            key={swimLane}
-            title={swimLane}
-          >
-            {swimLaneGroups[swimLane]?.map((card) => (
+
+      {/* Swimlane Container */}
+      <div className="h-full w-full overflow-x-auto flex space-x-4 pb-8">
+        {Object.entries(swimLaneGroups).map(([swimLane, cards]) => (
+          <Swimlane key={swimLane} title={swimLane} category={activeCategory || ''} subCategory={activeSubcategory || ''}>
+            {cards.map((card) => (
               <Card
                 key={card.id}
                 id={card.id}
                 content={card.content}
-                onEdit={() => handleEditCard(card.id)}
-                onDelete={() => handleDeleteCard(card.id)}
+                type={card.type}
               />
             ))}
-            <CreateCard swimLane={swimLane} subCategory={activeSubcategory || ""} />
           </Swimlane>
         ))}
-        <Swimlane isTerminus onAddSwimlane={handleAddSwimlane} />
       </div>
     </div>
   );

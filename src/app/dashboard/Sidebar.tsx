@@ -17,13 +17,16 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
+import { NewCardDialog, useNewCardDialog } from "@/app/dashboard/NewCardDialog";
+
 const Sidebar: React.FC = () => {
-  const { categories, setActiveSubcategory } = useDataContext();
+  const { categories, setActiveCategory, setActiveSubcategory } = useDataContext();
+  const { isOpen, open, close } = useNewCardDialog();
 
   return (
     <div className="h-full p-4 bg-slate-900 text-white flex flex-col">
       {/* Header */}
-      <div className="flex items-center justify-between text-lg font-semibold">
+      <div className="flex items-center justify-between text-lg font-semibold mb-6">
         <span>JPP EDD Demo</span>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -63,23 +66,19 @@ const Sidebar: React.FC = () => {
         </DropdownMenu>
       </div>
 
-
       {/* Project File */}
-      <div className="flex justify-between text-left items-center text-sm">
-        {/* <Button variant="ghost" className="flex items-center space-x-2"> */}
-                <div className="flex items-center space-x-2">
-
+      <div className="flex justify-between items-center text-sm mb-6">
+        <div className="flex items-center space-x-2">
           <File className="h-4 w-4" />
           <span>Design</span>
-          </div>
-        {/* </Button> */}
+        </div>
         <Button size="icon" className="bg-slate-900">
           <Plus className="h-4 w-4" />
         </Button>
       </div>
 
       {/* Accordion */}
-      <Accordion type="single" collapsible className="w-full">
+      <Accordion type="single" collapsible className="w-full flex-1 overflow-y-auto">
         {categories.map((category, index) => (
           <AccordionItem value={`item-${index}`} key={index}>
             <AccordionTrigger>{category.category}</AccordionTrigger>
@@ -89,7 +88,10 @@ const Sidebar: React.FC = () => {
                   <li
                     key={itemIndex}
                     className="py-2 px-4 hover:bg-accent hover:text-accent-foreground rounded-md cursor-pointer"
-                    onClick={() => setActiveSubcategory(item)}
+                    onClick={() => {
+                        setActiveCategory(category)
+                        setActiveSubcategory(item)
+                    }}
                   >
                     {item}
                   </li>
@@ -100,6 +102,23 @@ const Sidebar: React.FC = () => {
         ))}
       </Accordion>
 
+      {/* New Card Button */}
+      <div className="mt-auto">
+        <Button
+          onClick={open}
+          className="w-full bg-primary text-white hover:bg-primary-hover flex items-center justify-center py-4 rounded-lg"
+        >
+          <Plus className="mr-2 h-5 w-5" />
+          New Card
+        </Button>
+        <NewCardDialog
+          isOpen={isOpen}
+          onClose={close}
+          swimLane="Swimlane 1"
+          subCategory="Define Success"
+          category="End State"
+        />
+      </div>
     </div>
   );
 };

@@ -19,6 +19,7 @@ const CreateCard: React.FC<CreateCardProps> = ({ swimLane, subCategory }) => {
       subCategory,
       swimLane,
       content,
+      type: "bullet",
     });
 
     setContent(""); // Clear input after adding the card
