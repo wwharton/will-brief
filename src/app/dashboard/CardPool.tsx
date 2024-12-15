@@ -33,13 +33,13 @@ const CardPool: React.FC = () => {
   };
 
   return (
-    <div className="p-4">
+    <div className="p-4 h-full">
       {activeSubcategory && (
         <div className="text-center text-lg font-semibold mb-6">
           {activeSubcategory}
         </div>
       )}
-      <div className="flex space-x-4 overflow-x-auto">
+        <div className="h-full w-full overflow-x-auto flex space-x-4 pb-8">
         {swimLanes.map((swimLane) => (
           <Swimlane
             key={swimLane}

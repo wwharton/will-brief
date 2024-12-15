@@ -31,11 +31,11 @@ const Swimlane: React.FC<SwimlaneProps> = ({
 
   if (isTerminus) {
     return (
-      <Card className="w-[15vw] min-w-[200px]">
-        <CardContent className="p-0">
+      <Card className="w-[15vw] min-w-[200px] h-full flex flex-col rounded-none">
+        <CardContent className="p-0 flex-1">
           <Button
             variant="ghost"
-            className="w-full h-full flex items-center justify-center p-6 hover:bg-muted"
+            className="w-full h-full flex items-center justify-center rounded-none hover:bg-muted"
             onClick={onAddSwimlane}
           >
             <Plus className="mr-2 h-4 w-4" />
@@ -47,8 +47,8 @@ const Swimlane: React.FC<SwimlaneProps> = ({
   }
 
   return (
-    <Card className="w-[15vw] min-w-[200px]">
-      <CardHeader className="p-4">
+    <Card className="w-[15vw] min-w-[200px] h-full flex flex-col rounded-none">
+      <CardHeader className="p-4 flex-shrink-0">
         {isEditing ? (
           <Input
             value={newTitle}
@@ -67,8 +67,10 @@ const Swimlane: React.FC<SwimlaneProps> = ({
           </CardTitle>
         )}
       </CardHeader>
-      <CardContent className="p-4 pt-0 space-y-4">
-        {children}
+      <CardContent className="flex-1 overflow-y-auto p-4">
+        <div className="space-y-4">
+          {children}
+        </div>
       </CardContent>
     </Card>
   );
