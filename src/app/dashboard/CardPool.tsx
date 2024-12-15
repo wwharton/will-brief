@@ -7,8 +7,11 @@ import CreateCard from "@/app/dashboard/CreateCard";
 import { ICard } from "@/app/dashboard/ICard";
 import Card from "@/app/dashboard/CardComponent"; // Import the updated Card component
 
+import { useNavigationContext } from "./NavigationProvider";
+
 const CardPool: React.FC = () => {
-  const { cards, activeCategory, activeSubcategory } = useDataContext();
+  const { cards } = useDataContext();
+  const { activeCategory, activeSubcategory } = useNavigationContext();
 
   // Filter cards based on the active subcategory
   const filteredCards = cards.filter(

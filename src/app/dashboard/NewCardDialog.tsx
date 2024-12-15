@@ -15,6 +15,8 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useDataContext } from "@/app/dashboard/DataProvider";
 
+import { useNavigationContext } from "@/app/dashboard/NavigationProvider";
+
 interface NewCardDialogProps {
   isOpen: boolean;
   onClose: () => void;
@@ -38,11 +40,12 @@ export const NewCardDialog: React.FC<NewCardDialogProps> = ({
   swimLane,
   type = "bullet",
 }) => {
-  const { addCard, activeCategory, activeSubcategory } = useDataContext();
+  const { addCard } = useDataContext();
+  const { activeCategory, activeSubcategory } = useNavigationContext();
 
   const [cardTitle, setCardTitle] = useState("");
   const [cardContent, setCardContent] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState(activeCategory?.category || "");
+  const [selectedCategory, setSelectedCategory] = useState(activeCategory || "");
   const [selectedSubCategory, setSelectedSubCategory] = useState(
     activeSubcategory || ""
   );

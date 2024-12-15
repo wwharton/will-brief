@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { useDataContext } from "@/app/dashboard/DataProvider";
+import { useNavigationContext } from "@/app/dashboard/NavigationProvider";
 import { Plus, File, Trash2, Search, Layers, ChevronDown } from "lucide-react";
 import {
   DropdownMenu,
@@ -20,7 +21,8 @@ import {
 import { NewCardDialog, useNewCardDialog } from "@/app/dashboard/NewCardDialog";
 
 const Sidebar: React.FC = () => {
-  const { categories, setActiveCategory, setActiveSubcategory } = useDataContext();
+  const { categories } = useDataContext();
+  const { activeSubcategory, setActiveCategory, setActiveSubcategory } = useNavigationContext();
   const { isOpen, open, close } = useNewCardDialog();
 
   return (
@@ -84,13 +86,16 @@ const Sidebar: React.FC = () => {
             <AccordionTrigger>{category.category}</AccordionTrigger>
             <AccordionContent>
               <ul className="py-2 space-y-1">
-                {category.items.map((item, itemIndex) => (
+                {category.items.map((item) => (
+                    // if active category is this category, always display it as if it were hovered
                   <li
-                    key={itemIndex}
-                    className="py-2 px-4 hover:bg-accent hover:text-accent-foreground rounded-md cursor-pointer"
+                    key={item}
+                    //  if active category != category.catgory, then hover bg and text color
+                    // else always be highlighted
+                    className={activeSubcategory === item ? "bg-accent text-accent-foreground rounded-lg p-2" : "hover:bg-accent hover:text-accent-foreground rounded-lg p-2 cursor-pointer"}
                     onClick={() => {
-                        setActiveCategory(category)
-                        setActiveSubcategory(item)
+                      setActiveCategory(category.category);
+                      setActiveSubcategory(item);
                     }}
                   >
                     {item}
@@ -114,9 +119,6 @@ const Sidebar: React.FC = () => {
         <NewCardDialog
           isOpen={isOpen}
           onClose={close}
-          swimLane="Swimlane 1"
-          subCategory="Define Success"
-          category="End State"
         />
       </div>
     </div>

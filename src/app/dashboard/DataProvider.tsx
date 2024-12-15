@@ -10,10 +10,6 @@ interface Category {
 
 interface DataContextType {
   categories: Category[];
-  activeCategory: Category | null;
-  setActiveCategory: (category: Category | null) => void;
-  activeSubcategory: string | null;
-  setActiveSubcategory: (subcategory: string | null) => void;
   cards: ICard[];
   addCard: (card: ICard) => void;
   updateCard: (id: string, updatedCard: Partial<ICard>) => void;
@@ -42,10 +38,7 @@ const DataContext = createContext<DataContextType | undefined>(undefined);
 
 export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [cards, setCards] = useState<ICard[]>(initialCards);
-  const [activeCategory, setActiveCategory] = useState<Category | null>(null);
-  const [activeSubcategory, setActiveSubcategory] = useState<string | null>(null);
 
-  // Dynamically compute categories and subcategories from cards
   const categories = useMemo(() => {
     const categoryMap: Record<string, Set<string>> = {};
 
@@ -56,18 +49,15 @@ export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       categoryMap[card.category].add(card.subCategory);
     });
 
-    // Sort categories and subcategories lexicographically
     return Object.entries(categoryMap)
-      .sort(([catA], [catB]) => catA.localeCompare(catB))
+      .sort(([a], [b]) => a.localeCompare(b))
       .map(([category, subCategories]) => ({
         category,
         items: Array.from(subCategories).sort((a, b) => a.localeCompare(b)),
       }));
   }, [cards]);
 
-  const addCard = (card: ICard) => {
-    setCards((prev) => [...prev, card]);
-  };
+  const addCard = (card: ICard) => setCards((prev) => [...prev, card]);
 
   const updateCard = (id: string, updatedCard: Partial<ICard>) => {
     setCards((prev) =>
@@ -76,18 +66,7 @@ export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   };
 
   return (
-    <DataContext.Provider
-      value={{
-        categories,
-        activeCategory,
-        setActiveCategory,
-        activeSubcategory,
-        setActiveSubcategory,
-        cards,
-        addCard,
-        updateCard,
-      }}
-    >
+    <DataContext.Provider value={{ categories, cards, addCard, updateCard }}>
       {children}
     </DataContext.Provider>
   );

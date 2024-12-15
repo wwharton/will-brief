@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import { NewCardDialog, useNewCardDialog } from "@/app/dashboard/NewCardDialog";
 
-import { useDataContext } from "@/app/dashboard/DataProvider";
+import { useNavigationContext } from "@/app/dashboard/NavigationProvider";
 
 
 interface SwimlaneProps {
@@ -18,7 +18,7 @@ interface SwimlaneProps {
 
 const Swimlane: React.FC<SwimlaneProps> = ({ title, children }) => {
   const { isOpen, open, close } = useNewCardDialog();
-  const { activeCategory, activeSubcategory } = useDataContext();
+  const { activeCategory, activeSubcategory } = useNavigationContext();
 
   return (
     <Card className="w-[15vw] min-w-[200px] h-full flex flex-col rounded-none">

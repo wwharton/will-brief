@@ -5,8 +5,10 @@ import Layout from "@/app/dashboard/Layout";
 import { DataProvider, useDataContext } from "@/app/dashboard/DataProvider";
 import CardPool from "@/app/dashboard/CardPool";
 
+import { NavigationProvider, useNavigationContext } from "@/app/dashboard/NavigationProvider";
+
 const DashboardContent: React.FC = () => {
-  const { activeSubcategory } = useDataContext();
+  const { activeSubcategory } = useNavigationContext();
 
   if (activeSubcategory) {
     return <CardPool />;
@@ -22,9 +24,11 @@ const DashboardContent: React.FC = () => {
 const DashboardPage: React.FC = () => {
   return (
     <DataProvider>
-      <Layout>
-        <DashboardContent />
-      </Layout>
+      <NavigationProvider>
+        <Layout>
+          <DashboardContent />
+        </Layout>
+      </NavigationProvider>
     </DataProvider>
   );
 };
