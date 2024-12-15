@@ -1,22 +1,15 @@
-import React from "react";
+import React, { ReactNode } from "react";
 
 interface SwimlaneProps {
   title: string;
+  children?: ReactNode;
 }
 
-const Swimlane: React.FC<SwimlaneProps> = ({ title }) => {
+const Swimlane: React.FC<SwimlaneProps> = ({ title, children }) => {
   return (
-    <div className="flex flex-col border border-dashed border-gray-400 p-4 rounded-lg w-1/4">
+    <div className="flex flex-col border border-dashed border-border p-4 rounded-lg bg-card text-card-foreground">
       <h3 className="text-lg font-bold mb-4">{title}</h3>
-      <div className="space-y-4">
-        {/* Dummy card components */}
-        <div className="w-full h-20 bg-accent text-center rounded-lg flex items-center justify-center">
-          Card 1
-        </div>
-        <div className="w-full h-20 bg-accent text-center rounded-lg flex items-center justify-center">
-          Card 2
-        </div>
-      </div>
+      <div className="space-y-4">{children}</div>
     </div>
   );
 };
