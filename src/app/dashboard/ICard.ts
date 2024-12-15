@@ -1,4 +1,4 @@
-export interface Card {
+export interface ICard {
     id: string; // Unique identifier for the card
     category: string; // The main category the card belongs to
     subCategory: string; // The subcategory the card is tied to

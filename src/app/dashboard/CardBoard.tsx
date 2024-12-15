@@ -1,9 +1,10 @@
 'use client'
 
 import { useState } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { ScrollArea } from "@/components/ui/scroll-area"
 import { Plus, X } from 'lucide-react'
 
 interface CardItem {
@@ -54,37 +55,40 @@ export function CardBoard() {
 
   return (
     <div className="p-4 h-screen flex flex-col">
-      <div className="mb-4 flex items-center">
-        <Input
-          type="text"
-          placeholder="New Lane Title"
-          value={newLaneTitle}
-          onChange={(e) => setNewLaneTitle(e.target.value)}
-          className="mr-2"
-        />
-        <Button onClick={addLane}>Add Lane</Button>
-      </div>
-      <div className="flex-grow overflow-auto">
-        <div className="flex space-x-4 h-full">
+      <Card className="mb-4">
+        <CardContent className="flex items-center space-x-2 pt-6">
+          <Input
+            type="text"
+            placeholder="New Lane Title"
+            value={newLaneTitle}
+            onChange={(e) => setNewLaneTitle(e.target.value)}
+          />
+          <Button onClick={addLane}>Add Lane</Button>
+        </CardContent>
+      </Card>
+      <ScrollArea className="flex-grow">
+        <div className="flex space-x-4 pb-4">
           {lanes.map(lane => (
-            <div key={lane.id} className="flex-shrink-0 w-64 h-full">
-              <div className="bg-gray-200 p-4 shadow-md h-full flex flex-col">
-                <h2 className="text-xl font-bold mb-2">{lane.title}</h2>
+            <Card key={lane.id} className="flex-shrink-0 w-80">
+              <CardHeader>
+                <CardTitle>{lane.title}</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-2">
                 <Button 
                   onClick={() => addCard(lane.id)} 
                   variant="outline" 
-                  className="w-full mb-2"
+                  className="w-full"
                 >
                   <Plus className="mr-2 h-4 w-4" /> Add Card
                 </Button>
-                <div className="flex-grow overflow-y-auto">
+                <ScrollArea className="h-[calc(100vh-300px)]">
                   {lane.cards.map(card => (
-                    <Card key={card.id} className="mb-2 bg-[hsl(217.2,32.6%,17.5%)] text-[hsl(210,40%,98%)]">
+                    <Card key={card.id} className="mb-2">
                       <CardContent className="p-2 flex justify-between items-center">
                         <span>{card.content}</span>
                         <Button 
                           variant="ghost" 
-                          size="sm" 
+                          size="icon"
                           onClick={() => removeCard(lane.id, card.id)}
                         >
                           <X className="h-4 w-4" />
@@ -92,12 +96,13 @@ export function CardBoard() {
                       </CardContent>
                     </Card>
                   ))}
-                </div>
-              </div>
-            </div>
+                </ScrollArea>
+              </CardContent>
+            </Card>
           ))}
         </div>
-      </div>
+      </ScrollArea>
     </div>
   )
 }
+

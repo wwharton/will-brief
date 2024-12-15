@@ -14,11 +14,18 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
   return (
     <div className="flex min-h-screen bg-background">
-      <Sidebar
-        categories={categories}
-        onSelect={(item) => setActiveContent(item)}
-      />
-      <div className="w-4/5 p-4">{children}</div>
+      {/* Sidebar with max width defined */}
+      <div className="flex-shrink-0 max-w-xs w-full">
+        <Sidebar
+          categories={categories}
+          onSelect={(item) => setActiveContent(item)}
+        />
+      </div>
+
+      {/* Main Content Area */}
+      <div className="flex-grow p-4 bg-slate-500">
+        {children}
+      </div>
     </div>
   );
 };

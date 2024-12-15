@@ -1,7 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useState, ReactNode } from "react";
-import { Card } from "@/app/dashboard/Card";
+import { ICard } from "@/app/dashboard/ICard";
 
 interface Category {
   category: string;
@@ -12,9 +12,9 @@ interface DataContextType {
   categories: Category[];
   activeSubcategory: string | null;
   setActiveSubcategory: (subcategory: string | null) => void;
-  cards: Card[];
-  addCard: (card: Card) => void;
-  updateCard: (id: string, updatedCard: Partial<Card>) => void;
+  cards: ICard[];
+  addCard: (card: ICard) => void;
+  updateCard: (id: string, updatedCard: Partial<ICard>) => void;
 }
 
 const initialCategories: Category[] = [
@@ -25,7 +25,7 @@ const initialCategories: Category[] = [
   { category: "Plan", items: ["Execution Steps", "Resources"] },
 ];
 
-const initialCards: Card[] = [
+const initialCards: ICard[] = [
   {
     id: "1",
     category: "End State",
@@ -46,14 +46,14 @@ const DataContext = createContext<DataContextType | undefined>(undefined);
 
 export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [categories, setCategories] = useState<Category[]>(initialCategories);
-  const [cards, setCards] = useState<Card[]>(initialCards);
+  const [cards, setCards] = useState<ICard[]>(initialCards);
   const [activeSubcategory, setActiveSubcategory] = useState<string | null>(null);
 
-  const addCard = (card: Card) => {
+  const addCard = (card: ICard) => {
     setCards((prev) => [...prev, card]);
   };
 
-  const updateCard = (id: string, updatedCard: Partial<Card>) => {
+  const updateCard = (id: string, updatedCard: Partial<ICard>) => {
     setCards((prev) =>
       prev.map((card) => (card.id === id ? { ...card, ...updatedCard } : card))
     );
