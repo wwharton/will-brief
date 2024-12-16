@@ -107,8 +107,6 @@ const Sidebar: React.FC = () => {
 
 
       {/* Design Presentation Section */}
-      
-
       {/* Project File */}
       <div className="flex justify-between items-center text-sm mb-1">
         <div className="flex items-center space-x-2">
