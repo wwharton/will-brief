@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import Sidebar from "@/app/dashboard/Sidebar";
-import { useDataContext } from "@/app/dashboard/DataProvider";
+import Sidebar from "@/app/dashboard/components/Sidebar";
+import { useDataContext } from "@/app/dashboard/providers/DataProvider";
 
 interface LayoutProps {
   children: React.ReactNode;

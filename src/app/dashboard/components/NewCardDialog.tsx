@@ -13,9 +13,9 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { useDataContext } from "@/app/dashboard/DataProvider";
+import { useDataContext } from "@/app/dashboard/providers/DataProvider";
 
-import { useNavigationContext } from "@/app/dashboard/NavigationProvider";
+import { useNavigationContext } from "@/app/dashboard/providers/NavigationProvider";
 
 interface NewCardDialogProps {
   isOpen: boolean;

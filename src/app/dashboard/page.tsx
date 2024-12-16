@@ -2,10 +2,10 @@
 
 import React from "react";
 import Layout from "@/app/dashboard/Layout";
-import { DataProvider, useDataContext } from "@/app/dashboard/DataProvider";
-import CardPool from "@/app/dashboard/CardPool";
+import { DataProvider, useDataContext } from "@/app/dashboard/providers/DataProvider";
+import CardPool from "@/app/dashboard/components/CardPool";
 
-import { NavigationProvider, useNavigationContext } from "@/app/dashboard/NavigationProvider";
+import { NavigationProvider, useNavigationContext } from "@/app/dashboard/providers/NavigationProvider";
 
 const DashboardContent: React.FC = () => {
   const { activeSubcategory } = useNavigationContext();

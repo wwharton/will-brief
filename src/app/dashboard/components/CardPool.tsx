@@ -1,12 +1,12 @@
 "use client";
 
 import React from "react";
-import { useDataContext } from "@/app/dashboard/DataProvider";
-import Swimlane from "@/app/dashboard/Swimlane";
+import { useDataContext } from "@/app/dashboard/providers/DataProvider";
+import Swimlane from "@/app/dashboard/components/Swimlane";
 import { ICard } from "@/app/dashboard/ICard";
-import Card from "@/app/dashboard/CardComponent"; // Import the updated Card component
+import Card from "@/app/dashboard/components/CardComponent"; // Import the updated Card component
 
-import { useNavigationContext } from "./NavigationProvider";
+import { useNavigationContext } from "../providers/NavigationProvider";
 
 const CardPool: React.FC = () => {
   const { cards } = useDataContext();

@@ -4,9 +4,9 @@ import React, { ReactNode } from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
-import { NewCardDialog, useNewCardDialog } from "@/app/dashboard/NewCardDialog";
+import { NewCardDialog, useNewCardDialog } from "@/app/dashboard/components/NewCardDialog";
 
-import { useNavigationContext } from "@/app/dashboard/NavigationProvider";
+import { useNavigationContext } from "@/app/dashboard/providers/NavigationProvider";
 
 
 interface SwimlaneProps {

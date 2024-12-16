@@ -8,8 +8,8 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
-import { useDataContext } from "@/app/dashboard/DataProvider";
-import { useNavigationContext } from "@/app/dashboard/NavigationProvider";
+import { useDataContext } from "@/app/dashboard/providers/DataProvider";
+import { useNavigationContext } from "@/app/dashboard/providers/NavigationProvider";
 import { Plus, File, Trash2, Search, Layers, ChevronDown } from "lucide-react";
 import {
   DropdownMenu,
@@ -18,7 +18,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-import { NewCardDialog, useNewCardDialog } from "@/app/dashboard/NewCardDialog";
+import { NewCardDialog, useNewCardDialog } from "@/app/dashboard/components/NewCardDialog";
 
 const Sidebar: React.FC = () => {
   const { categories } = useDataContext();
