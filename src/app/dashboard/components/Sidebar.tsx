@@ -10,7 +10,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { useDataContext } from "@/app/dashboard/providers/DataProvider";
 import { useNavigationContext } from "@/app/dashboard/providers/NavigationProvider";
-import { Plus, File, Trash2, Search, Layers, ChevronDown } from "lucide-react";
+import { Plus, File, Trash2, Search, Layers, ChevronDown, Presentation } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -22,7 +22,7 @@ import { NewCardDialog, useNewCardDialog } from "@/app/dashboard/components/NewC
 
 const Sidebar: React.FC = () => {
   const { categories } = useDataContext();
-  const { activeSubcategory, setActiveCategory, setActiveSubcategory } = useNavigationContext();
+  const { activeSubcategory, setActiveCategory, setActiveSubcategory, setActiveView } = useNavigationContext();
   const { isOpen, open, close } = useNewCardDialog();
 
   return (
@@ -45,7 +45,7 @@ const Sidebar: React.FC = () => {
       </div>
 
       {/* Button Row */}
-      <div className="flex justify-between items-center text-sm space-x-2 mb-4">
+      <div className="flex justify-between items-center text-sm space-x-2 mb-6">
         <Button size="sm" className="flex items-center space-x-1 bg-slate-900">
           <Search className="h-4 w-4" />
           <span>Jump to</span>
@@ -69,18 +69,15 @@ const Sidebar: React.FC = () => {
       </div>
 
       {/* Project File */}
-      <div className="flex justify-between items-center text-sm mb-6">
+      <div className="flex justify-between items-center text-sm mb-1">
         <div className="flex items-center space-x-2">
           <File className="h-4 w-4" />
-          <span>Design</span>
+          <h3 className="text-lg font-semibold">Design Files</h3>
         </div>
-        <Button size="icon" className="bg-slate-900">
-          <Plus className="h-4 w-4" />
-        </Button>
       </div>
 
       {/* Accordion */}
-      <Accordion type="single" collapsible className="w-full flex-1 overflow-y-auto">
+      <Accordion type="single" collapsible className="w-full overflow-y-auto mb-6">
         {categories.map((category, index) => (
           <AccordionItem value={`item-${index}`} key={index}>
             <AccordionTrigger>{category.category}</AccordionTrigger>
@@ -96,6 +93,7 @@ const Sidebar: React.FC = () => {
                     onClick={() => {
                       setActiveCategory(category.category);
                       setActiveSubcategory(item);
+                      setActiveView(null);
                     }}
                   >
                     {item}
@@ -106,6 +104,37 @@ const Sidebar: React.FC = () => {
           </AccordionItem>
         ))}
       </Accordion>
+
+
+      {/* Design Presentation Section */}
+      
+
+      {/* Project File */}
+      <div className="flex justify-between items-center text-sm mb-1">
+        <div className="flex items-center space-x-2">
+          <Presentation className="h-4 w-4" />
+          <h3 className="text-lg font-semibold">Design Presentation</h3>
+        </div>
+      </div>
+
+
+      <ul className="space-y-1">
+        {["Presentation", "Document", "Diagram"].map((item) => (
+          <li
+          className="py-2 px-4 hover:bg-accent hover:text-accent-foreground rounded-md cursor-pointer"
+          onClick={() => {
+            setActiveView(item);
+            setActiveCategory(null);
+            setActiveSubcategory(null);
+          }}
+        >
+          {item}
+        </li>
+          ))
+        }
+          
+          
+        </ul>
 
       {/* New Card Button */}
       <div className="mt-auto">

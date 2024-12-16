@@ -7,6 +7,8 @@ interface NavigationContextType {
   setActiveCategory: (category: string | null) => void;
   activeSubcategory: string | null;
   setActiveSubcategory: (subcategory: string | null) => void;
+  activeView: string | null; // Tracks the current fixed view (e.g., "Presentation")
+  setActiveView: (view: string | null) => void;
 }
 
 const NavigationContext = createContext<NavigationContextType | undefined>(undefined);
@@ -14,10 +16,18 @@ const NavigationContext = createContext<NavigationContextType | undefined>(undef
 export const NavigationProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [activeSubcategory, setActiveSubcategory] = useState<string | null>(null);
+  const [activeView, setActiveView] = useState<string | null>(null);
 
   return (
     <NavigationContext.Provider
-      value={{ activeCategory, setActiveCategory, activeSubcategory, setActiveSubcategory }}
+      value={{
+        activeCategory,
+        setActiveCategory,
+        activeSubcategory,
+        setActiveSubcategory,
+        activeView,
+        setActiveView,
+      }}
     >
       {children}
     </NavigationContext.Provider>
