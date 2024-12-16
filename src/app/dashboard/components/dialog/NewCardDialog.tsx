@@ -20,7 +20,9 @@ import { useNavigationContext } from "@/app/dashboard/providers/NavigationProvid
 interface NewCardDialogProps {
   isOpen: boolean;
   onClose: () => void;
-  swimLane?: string;
+  swimlane?: string;
+  category?: string;
+  subcategory?: string;
   type?: "bullet" | "table" | "column" | "endpoint";
 }
 
@@ -34,22 +36,22 @@ export const useNewCardDialog = () => {
   return { isOpen, open, close, toggle };
 };
 
-export const NewCardDialog: React.FC<NewCardDialogProps> = ({
+const NewCardDialog: React.FC<NewCardDialogProps> = ({
   isOpen,
   onClose,
-  swimLane,
+  swimlane,
+  category,
+  subcategory,
   type = "bullet",
 }) => {
   const { addCard } = useDataContext();
-  const { activeCategory, activeSubcategory } = useNavigationContext();
 
-  const [cardTitle, setCardTitle] = useState("");
   const [cardContent, setCardContent] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState(activeCategory || "");
+  const [selectedCategory, setSelectedCategory] = useState(category || "");
   const [selectedSubCategory, setSelectedSubCategory] = useState(
-    activeSubcategory || ""
+    subcategory || ""
   );
-  const [selectedSwimLane, setSelectedSwimLane] = useState(swimLane || "");
+  const [selectedSwimLane, setSelectedSwimLane] = useState(swimlane || "");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -59,17 +61,16 @@ export const NewCardDialog: React.FC<NewCardDialogProps> = ({
       id: Date.now().toString(),
       category: selectedCategory,
       subCategory: selectedSubCategory,
-      swimLane: selectedSwimLane,
+      swimlane: selectedSwimLane,
       content: cardContent,
       type,
     });
 
     // Clear inputs and close the dialog
-    setCardTitle("");
     setCardContent("");
-    setSelectedCategory(activeCategory || "");
-    setSelectedSubCategory(activeSubcategory || "");
-    setSelectedSwimLane(swimLane || "");
+    setSelectedCategory(category || "");
+    setSelectedSubCategory(subcategory || "");
+    setSelectedSwimLane(swimlane || "");
     onClose();
   };
 
@@ -84,19 +85,6 @@ export const NewCardDialog: React.FC<NewCardDialogProps> = ({
         </DialogHeader>
         <form onSubmit={handleSubmit}>
           <div className="grid gap-4 py-4">
-            {/* Card Title */}
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="title" className="text-right">
-                Title
-              </Label>
-              <Input
-                id="title"
-                value={cardTitle}
-                onChange={(e) => setCardTitle(e.target.value)}
-                className="col-span-3"
-              />
-            </div>
-
             {/* Card Content */}
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="content" className="text-right">
@@ -138,11 +126,11 @@ export const NewCardDialog: React.FC<NewCardDialogProps> = ({
 
             {/* SwimLane Entry */}
             <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="swimLane" className="text-right">
+              <Label htmlFor="swimlane" className="text-right">
                 SwimLane
               </Label>
               <Input
-                id="swimLane"
+                id="swimlane"
                 value={selectedSwimLane}
                 onChange={(e) => setSelectedSwimLane(e.target.value)}
                 className="col-span-3"
@@ -157,3 +145,5 @@ export const NewCardDialog: React.FC<NewCardDialogProps> = ({
     </Dialog>
   );
 };
+
+export default NewCardDialog;

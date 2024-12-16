@@ -18,12 +18,12 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-import { NewCardDialog, useNewCardDialog } from "@/app/dashboard/components/NewCardDialog";
+import { useDialogContext } from "@/app/dashboard/providers/DialogProvider";
 
 const Sidebar: React.FC = () => {
   const { categories } = useDataContext();
   const { activeSubcategory, setActiveCategory, setActiveSubcategory, setActiveView } = useNavigationContext();
-  const { isOpen, open, close } = useNewCardDialog();
+  const { openDialog } = useDialogContext();
 
   return (
     <div className="h-full p-4 bg-slate-900 text-white flex flex-col">
@@ -140,16 +140,12 @@ const Sidebar: React.FC = () => {
       {/* New Card Button */}
       <div className="mt-auto">
         <Button
-          onClick={open}
+          onClick={() => {openDialog("new")}}
           className="w-full bg-primary text-white hover:bg-primary-hover flex items-center justify-center py-4 rounded-lg"
         >
           <Plus className="mr-2 h-5 w-5" />
           New Card
         </Button>
-        <NewCardDialog
-          isOpen={isOpen}
-          onClose={close}
-        />
       </div>
     </div>
   );

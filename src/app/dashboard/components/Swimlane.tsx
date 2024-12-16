@@ -4,9 +4,8 @@ import React, { ReactNode } from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
-import { NewCardDialog, useNewCardDialog } from "@/app/dashboard/components/NewCardDialog";
 
-import { useNavigationContext } from "@/app/dashboard/providers/NavigationProvider";
+import { useDialogContext } from "@/app/dashboard/providers/DialogProvider";
 
 
 interface SwimlaneProps {
@@ -17,11 +16,12 @@ interface SwimlaneProps {
 }
 
 const Swimlane: React.FC<SwimlaneProps> = ({ title, children }) => {
-  const { isOpen, open, close } = useNewCardDialog();
-  const { activeCategory, activeSubcategory } = useNavigationContext();
+  const { openDialog } = useDialogContext();
+
+  console.log("Swimlane rendered", title);
 
   return (
-    <Card className="w-[15vw] min-w-[200px] h-full flex flex-col rounded-none">
+    <Card className="w-[25vw] min-w-[200px] h-full flex flex-col rounded-none">
       <CardHeader className="p-4 flex-shrink-0">
         <CardTitle className="text-lg font-bold">{title}</CardTitle>
       </CardHeader>
@@ -30,18 +30,11 @@ const Swimlane: React.FC<SwimlaneProps> = ({ title, children }) => {
         <Button
           variant="ghost"
           className="w-full mt-4 flex items-center justify-center rounded-md hover:bg-muted"
-          onClick={open}
+          onClick={() => {openDialog("new", undefined, title)}}
         >
           <Plus className="mr-2 h-4 w-4" />
           Add Card
         </Button>
-        <NewCardDialog
-          isOpen={isOpen}
-          onClose={close}
-          swimLane={title}
-          subCategory={activeSubcategory || ''}
-          category={activeCategory || ''}
-        />
       </CardContent>
     </Card>
   );

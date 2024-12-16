@@ -14,6 +14,7 @@ interface DataContextType {
   cards: ICard[];
   addCard: (card: ICard) => void;
   updateCard: (id: string, updatedCard: Partial<ICard>) => void;
+  deleteCard: (id: string) => void; // New deleteCard function
 }
 
 const DataContext = createContext<DataContextType | undefined>(undefined);
@@ -47,8 +48,12 @@ export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     );
   };
 
+  const deleteCard = (id: string) => {
+    setCards((prev) => prev.filter((card) => card.id !== id));
+  };
+
   return (
-    <DataContext.Provider value={{ categories, cards, addCard, updateCard }}>
+    <DataContext.Provider value={{ categories, cards, addCard, updateCard, deleteCard }}>
       {children}
     </DataContext.Provider>
   );
