@@ -3,7 +3,6 @@
 import React from "react";
 import { useDataContext } from "@/app/dashboard/DataProvider";
 import Swimlane from "@/app/dashboard/Swimlane";
-import CreateCard from "@/app/dashboard/CreateCard";
 import { ICard } from "@/app/dashboard/ICard";
 import Card from "@/app/dashboard/CardComponent"; // Import the updated Card component
 
@@ -43,7 +42,7 @@ const CardPool: React.FC = () => {
                 key={card.id}
                 id={card.id}
                 content={card.content}
-                type={card.type}
+                // type={card.type}
               />
             ))}
           </Swimlane>

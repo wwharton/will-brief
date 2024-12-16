@@ -2,6 +2,7 @@
 
 import React, { createContext, useContext, useState, ReactNode, useMemo } from "react";
 import { ICard } from "@/app/dashboard/ICard";
+import { initialCards } from "@/app/dashboard/data";
 
 interface Category {
   category: string;
@@ -14,25 +15,6 @@ interface DataContextType {
   addCard: (card: ICard) => void;
   updateCard: (id: string, updatedCard: Partial<ICard>) => void;
 }
-
-const initialCards: ICard[] = [
-  {
-    id: "1",
-    category: "1 - End State",
-    subCategory: "Define Success",
-    swimLane: "Swimlane 1",
-    content: "Customer can see their order status",
-    type: "bullet",
-  },
-  {
-    id: "2",
-    category: "2 - API",
-    subCategory: "Endpoints",
-    swimLane: "Swimlane 1",
-    content: "GET /order/status",
-    type: "endpoint",
-  },
-];
 
 const DataContext = createContext<DataContextType | undefined>(undefined);
 
