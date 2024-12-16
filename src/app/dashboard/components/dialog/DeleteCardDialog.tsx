@@ -9,7 +9,7 @@ import { ICard } from "@/app/dashboard/ICard";
 interface DeleteCardDialogProps {
   isOpen: boolean;
   onClose: () => void;
-  card: ICard;
+  cardData: Partial<ICard>;
 }
 
 export const useDeleteCardDialog = () => {
@@ -26,11 +26,15 @@ export const useDeleteCardDialog = () => {
   };
   
 
-const DeleteCardDialog: React.FC<DeleteCardDialogProps> = ({ isOpen, onClose, card }) => {
+const DeleteCardDialog: React.FC<DeleteCardDialogProps> = ({ isOpen, onClose, cardData }) => {
   const { deleteCard } = useDataContext();
 
   const handleDelete = () => {
-    deleteCard(card.id);
+    if (cardData?.id){
+      deleteCard(cardData?.id);
+    } else {
+      console.error("Card ID not found");
+    }
     onClose();
   };
 

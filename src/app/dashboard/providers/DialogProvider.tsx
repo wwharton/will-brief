@@ -8,31 +8,28 @@ type DialogType = "new" | "update" | "delete" | null;
 
 interface DialogState {
   type: DialogType;
-  card: ICard | null; // Card for update/delete or null for new
-  swimlane?: string | null;
+  card?: Partial<ICard>;
 }
 
 interface DialogContextType {
   dialogState: DialogState;
-  openDialog: (type: DialogType, card?: ICard, swimlane?: string) => void;
+  openDialog: (type: DialogType, card?: Partial<ICard>) => void;
   closeDialog: () => void;
 }
 
 const DialogContext = createContext<DialogContextType | undefined>(undefined);
 
 export const DialogProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [dialogState, setDialogState] = useState<DialogState>({
-    type: null,
-    card: null,
-    swimlane: null,
-  });
+  const [dialogState, setDialogState] = useState<DialogState>({ type: null });
 
-  const openDialog = (type: DialogType, card: ICard | null = null, swimlane: string | null = null) => {
-    setDialogState({ type, card, swimlane });
+  console.log(dialogState)
+
+  const openDialog = (type: DialogType, card: Partial<ICard> = {}) => {
+    setDialogState({ type, card });
   };
 
   const closeDialog = () => {
-    setDialogState({ type: null, card: null, swimlane: null });
+    setDialogState({ type: null });
   };
 
   return (

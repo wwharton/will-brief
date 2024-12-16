@@ -12,9 +12,9 @@ interface Category {
 interface DataContextType {
   categories: Category[];
   cards: ICard[];
-  addCard: (card: ICard) => void;
+  createCard: (cardData: Partial<ICard>) => void;
   updateCard: (id: string, updatedCard: Partial<ICard>) => void;
-  deleteCard: (id: string) => void; // New deleteCard function
+  deleteCard: (id: string) => void;
 }
 
 const DataContext = createContext<DataContextType | undefined>(undefined);
@@ -22,6 +22,7 @@ const DataContext = createContext<DataContextType | undefined>(undefined);
 export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [cards, setCards] = useState<ICard[]>(initialCards);
 
+  // Compute categories and subcategories dynamically based on cards
   const categories = useMemo(() => {
     const categoryMap: Record<string, Set<string>> = {};
 
@@ -40,20 +41,26 @@ export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       }));
   }, [cards]);
 
-  const addCard = (card: ICard) => setCards((prev) => [...prev, card]);
+  // Create a new card
+  const createCard = (cardData: Partial<ICard>) => {
+    const newCard: ICard = { id: crypto.randomUUID(), ...cardData };
+    setCards((prev) => [...prev, newCard]);
+  };
 
+  // Update an existing card
   const updateCard = (id: string, updatedCard: Partial<ICard>) => {
     setCards((prev) =>
       prev.map((card) => (card.id === id ? { ...card, ...updatedCard } : card))
     );
   };
 
+  // Delete a card
   const deleteCard = (id: string) => {
     setCards((prev) => prev.filter((card) => card.id !== id));
   };
 
   return (
-    <DataContext.Provider value={{ categories, cards, addCard, updateCard, deleteCard }}>
+    <DataContext.Provider value={{ categories, cards, createCard, updateCard, deleteCard }}>
       {children}
     </DataContext.Provider>
   );

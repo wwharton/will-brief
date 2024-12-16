@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -14,63 +14,40 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useDataContext } from "@/app/dashboard/providers/DataProvider";
-
-import { useNavigationContext } from "@/app/dashboard/providers/NavigationProvider";
+import { ICard } from "@/app/dashboard/ICard";
 
 interface NewCardDialogProps {
   isOpen: boolean;
   onClose: () => void;
-  swimlane?: string;
-  category?: string;
-  subcategory?: string;
-  type?: "bullet" | "table" | "column" | "endpoint";
+  cardData?: Partial<ICard>; // Partial card data to prefill the dialog
 }
-
-export const useNewCardDialog = () => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const open = () => setIsOpen(true);
-  const close = () => setIsOpen(false);
-  const toggle = () => setIsOpen((prev) => !prev);
-
-  return { isOpen, open, close, toggle };
-};
 
 const NewCardDialog: React.FC<NewCardDialogProps> = ({
   isOpen,
   onClose,
-  swimlane,
-  category,
-  subcategory,
-  type = "bullet",
+  cardData = {},
 }) => {
-  const { addCard } = useDataContext();
+  const { createCard } = useDataContext();
 
-  const [cardContent, setCardContent] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState(category || "");
-  const [selectedSubCategory, setSelectedSubCategory] = useState(
-    subcategory || ""
-  );
-  const [selectedSwimLane, setSelectedSwimLane] = useState(swimlane || "");
+  const [cardContent, setCardContent] = useState(cardData.content || "");
+  const [category, setCategory] = useState(cardData.category || "");
+  const [subCategory, setSubCategory] = useState(cardData.subCategory || "");
+  const [swimlane, setSwimlane] = useState(cardData.swimlane || "");
+  const [type, setType] = useState<ICard["type"]>(cardData.type || "bullet");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Create new card
-    addCard({
-      id: Date.now().toString(),
-      category: selectedCategory,
-      subCategory: selectedSubCategory,
-      swimlane: selectedSwimLane,
+    // Create the card with the provided data
+    createCard({
+      category,
+      subCategory,
+      swimlane,
       content: cardContent,
       type,
     });
 
-    // Clear inputs and close the dialog
-    setCardContent("");
-    setSelectedCategory(category || "");
-    setSelectedSubCategory(subcategory || "");
-    setSelectedSwimLane(swimlane || "");
+    // Close the dialog after submission
     onClose();
   };
 
@@ -98,43 +75,61 @@ const NewCardDialog: React.FC<NewCardDialogProps> = ({
               />
             </div>
 
-            {/* Category Entry */}
+            {/* Category */}
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="category" className="text-right">
                 Category
               </Label>
               <Input
                 id="category"
-                value={selectedCategory}
-                onChange={(e) => setSelectedCategory(e.target.value)}
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
                 className="col-span-3"
               />
             </div>
 
-            {/* SubCategory Entry */}
+            {/* SubCategory */}
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="subCategory" className="text-right">
                 SubCategory
               </Label>
               <Input
                 id="subCategory"
-                value={selectedSubCategory}
-                onChange={(e) => setSelectedSubCategory(e.target.value)}
+                value={subCategory}
+                onChange={(e) => setSubCategory(e.target.value)}
                 className="col-span-3"
               />
             </div>
 
-            {/* SwimLane Entry */}
+            {/* SwimLane */}
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="swimlane" className="text-right">
-                SwimLane
+                Swimlane
               </Label>
               <Input
                 id="swimlane"
-                value={selectedSwimLane}
-                onChange={(e) => setSelectedSwimLane(e.target.value)}
+                value={swimlane}
+                onChange={(e) => setSwimlane(e.target.value)}
                 className="col-span-3"
               />
+            </div>
+
+            {/* Card Type */}
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="type" className="text-right">
+                Type
+              </Label>
+              <select
+                id="type"
+                value={type}
+                onChange={(e) => setType(e.target.value as ICard["type"])}
+                className="col-span-3 border rounded p-2"
+              >
+                <option value="bullet">Bullet</option>
+                <option value="table">Table</option>
+                <option value="column">Column</option>
+                <option value="endpoint">Endpoint</option>
+              </select>
             </div>
           </div>
           <DialogFooter>
