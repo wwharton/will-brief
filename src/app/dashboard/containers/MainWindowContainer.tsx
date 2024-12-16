@@ -5,6 +5,7 @@ import { useNavigationContext } from "@/app/dashboard/providers/NavigationProvid
 import DialogContainer from "@/app/dashboard/containers/DialogContainer";
 import CardPool from "@/app/dashboard/components/CardPool";
 import DocumentView from "@/app/dashboard/components/DocumentView";
+import MermaidDiagram from "../components/MermaidDiagram";
 
 const PresentationView = () => <div className="text-center text-lg font-bold">Presentation View</div>;
 const DiagramView = () => <div className="text-center text-lg font-bold">Diagram View</div>;
@@ -19,7 +20,7 @@ const DefaultView = ({ activeSubcategory }: { activeSubcategory: string | null }
 const viewComponents: Record<string, React.FC<{ activeSubcategory?: string | null }>> = {
   Presentation: PresentationView,
   Document: DocumentView,
-  Diagram: DiagramView,
+  Diagram: MermaidDiagram,
 };
 
 const MainWindowContainer: React.FC = () => {

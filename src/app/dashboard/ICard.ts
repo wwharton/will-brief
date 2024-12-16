@@ -4,5 +4,6 @@ export interface ICard {
   subCategory: string; // The subcategory the card is tied to
   swimlane: string; // The swimlane the card belongs to
   content: string; // The text content of the card
+  parent?: string; // id of parent card, used for diagraming
   type: "bullet" | "table" | "column" | "endpoint"; // The type of the card
 }
