@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useNavigationContext } from "@/app/dashboard/providers/NavigationProvider";
-import { DialogProvider } from "@/app/dashboard/providers/DialogProvider";
+import DialogContainer from "@/app/dashboard/containers/DialogContainer";
 import CardPool from "@/app/dashboard/components/CardPool";
 import DocumentView from "@/app/dashboard/components/DocumentView";
 
@@ -27,9 +27,10 @@ const MainWindowContainer: React.FC = () => {
   const ViewComponent = viewComponents[activeView || "Edit"] || DefaultView;
 
   return (
-    <DialogProvider>
+    <>
       <ViewComponent activeSubcategory={activeSubcategory} />
-    </DialogProvider>
+      <DialogContainer />
+    </>
   );
 };
 
