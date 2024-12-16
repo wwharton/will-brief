@@ -26,7 +26,7 @@ export const initialCards: ICard[] = [
       type: "endpoint",
     },
     {
-      id: "3",
+      id: "4",
       category: "2 - Engineering Design",
       subCategory: "Backend",
       swimLane: "Database",
@@ -34,7 +34,7 @@ export const initialCards: ICard[] = [
       type: "table",
     },
     {
-      id: "4",
+      id: "5",
       category: "2 - Engineering Design",
       subCategory: "Frontend",
       swimLane: "User Profile",

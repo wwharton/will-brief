@@ -121,6 +121,7 @@ const Sidebar: React.FC = () => {
       <ul className="space-y-1">
         {["Presentation", "Document", "Diagram"].map((item) => (
           <li
+          key={item}
           className="py-2 px-4 hover:bg-accent hover:text-accent-foreground rounded-md cursor-pointer"
           onClick={() => {
             setActiveView(item);

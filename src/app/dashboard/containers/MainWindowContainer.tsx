@@ -4,9 +4,11 @@ import React from "react";
 import { useNavigationContext } from "@/app/dashboard/providers/NavigationProvider";
 import CardPool from "@/app/dashboard/components/CardPool";
 
+import DocumentView from "@/app/dashboard/components/DocumentView";
+
 // Dummy components for different views
 const PresentationView = () => <div className="text-center text-lg font-bold">Presentation View</div>;
-const DocumentView = () => <div className="text-center text-lg font-bold">Document View</div>;
+// const DocumentView = () => <div className="text-center text-lg font-bold">Document View</div>;
 const DiagramView = () => <div className="text-center text-lg font-bold">Diagram View</div>;
 const DefaultView = ({ activeSubcategory }: { activeSubcategory: string | null }) => (
   activeSubcategory ? <CardPool /> : <div className="text-center text-lg font-bold">Select a subcategory from the sidebar to begin.</div>
