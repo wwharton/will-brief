@@ -45,7 +45,7 @@ const UpdateCardDialog: React.FC<UpdateCardDialogProps> = ({
     onClose();
   };
 
-  const truncatedContent = (text: string) => (text.length > 30 ? `${text.slice(0, 30)}...` : text);
+  const truncatedTitle = (text: string) => (text.length > 30 ? `${text.slice(0, 30)}...` : text);
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -123,7 +123,7 @@ const UpdateCardDialog: React.FC<UpdateCardDialogProps> = ({
             {/* Parent Card */}
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="parent" className="text-right">
-                Parent
+                Child Of
               </Label>
               <Select
                 value={parent}
@@ -140,7 +140,7 @@ const UpdateCardDialog: React.FC<UpdateCardDialogProps> = ({
                     .filter((card) => card.id !== cardData.id) // Exclude the current card
                     .map((card) => (
                       <SelectItem key={card.id} value={card.id}>
-                        {truncatedContent(card.content)}
+                        {truncatedTitle(card.title)}
                       </SelectItem>
                     ))}
                 </SelectContent>
