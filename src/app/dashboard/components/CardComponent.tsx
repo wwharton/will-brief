@@ -10,24 +10,24 @@ import {
 
 interface CustomCardProps {
   id: string;
+  title?: string;
   content: string;
-  description?: string;
   onEdit?: () => void; // Callback for editing the card
   onDelete?: () => void; // Callback for deleting the card
 }
 
 const Card: React.FC<CustomCardProps> = ({
   id,
+  title,
   content,
-  description,
   onEdit,
   onDelete,
 }) => {
   return (
     <ShadcnCard className="w-full">
       <CardHeader>
-        <CardTitle>{content}</CardTitle>
-        {description && <CardDescription>{description}</CardDescription>}
+        <CardTitle>{title}</CardTitle>
+        {content && <CardDescription>{content}</CardDescription>}
       </CardHeader>
       <CardContent>
         <div className="flex justify-end space-x-2">

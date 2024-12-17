@@ -36,6 +36,7 @@ const CardPool: React.FC = () => {
               <Card
                 key={card.id}
                 id={card.id}
+                title={card.title}
                 content={card.content}
                 onEdit={() => openDialog("update", card)}
                 onDelete={() => openDialog("delete", card)}

@@ -29,6 +29,7 @@ const NewCardDialog: React.FC<NewCardDialogProps> = ({
 }) => {
   const { createCard } = useDataContext();
 
+  const [cardTitle, setCardTitle] = useState(cardData.title || "");
   const [cardContent, setCardContent] = useState(cardData.content || "");
   const [category, setCategory] = useState(cardData.category || "");
   const [subCategory, setSubCategory] = useState(cardData.subCategory || "");
@@ -62,6 +63,19 @@ const NewCardDialog: React.FC<NewCardDialogProps> = ({
         </DialogHeader>
         <form onSubmit={handleSubmit}>
           <div className="grid gap-4 py-4">
+            {/* Card Content */}
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="content" className="text-right">
+                Title
+              </Label>
+              <Textarea
+                id="title"
+                value={cardTitle}
+                onChange={(e) => setCardTitle(e.target.value)}
+                className="col-span-3"
+              />
+            </div>
+
             {/* Card Content */}
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="content" className="text-right">

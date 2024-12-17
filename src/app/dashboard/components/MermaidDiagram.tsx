@@ -15,19 +15,18 @@ const MermaidDiagram: React.FC = () => {
     let mermaidString = "graph TD\n";
 
     cards.forEach((card) => {
-      const { id, parent, content } = card;
+      const { id, parent, content, title } = card;
 
       // Escape '<' characters in content
-      const escapedContent = content.replace(/</g, "&lt;");
+      const escapedTitle = title.replace(/</g, "&lt;");
 
       // Truncate content if needed
-      const truncatedContent =
-        escapedContent.length > 20
-          ? `${escapedContent.slice(0, 20)}...`
-          : escapedContent;
+      const truncatedTitle =
+        escapedTitle.length > 30
+          ? `${escapedTitle.slice(0, 30)}...`
+          : escapedTitle;
 
-      // Add the card as a node
-      mermaidString += `    ${id}["${truncatedContent}"]\n`;
+      mermaidString += `    ${id}["${truncatedTitle}"]\n`;
 
       // Add parent-child relationship if parent is valid
       if (parent && parent !== "No Parent" && parent.trim() !== "") {

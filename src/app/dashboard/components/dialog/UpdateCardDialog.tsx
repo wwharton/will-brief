@@ -33,6 +33,7 @@ const UpdateCardDialog: React.FC<UpdateCardDialogProps> = ({
   const [category, setCategory] = useState(cardData?.category || "");
   const [subCategory, setSubCategory] = useState(cardData?.subCategory || "");
   const [swimlane, setSwimLane] = useState(cardData?.swimlane || "");
+  const [title, setTitle] = useState(cardData?.title || "");
   const [content, setContent] = useState(cardData?.content || "");
   const [parent, setParent] = useState(cardData?.parent || "");
 
@@ -55,6 +56,18 @@ const UpdateCardDialog: React.FC<UpdateCardDialogProps> = ({
         </DialogHeader>
         <form onSubmit={handleSubmit}>
           <div className="grid gap-4 py-4">
+            {/* Title */}
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="title" className="text-right">
+                Title
+              </Label>
+              <Input
+                id="title"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                className="col-span-3"
+              />
+            </div>
             {/* Content */}
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="content" className="text-right">
