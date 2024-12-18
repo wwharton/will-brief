@@ -25,7 +25,7 @@ const SelectEditor: React.FC<SelectEditorProps> = ({
   options,
 }) => {
   return (
-    <div className="grid grid-cols-4 items-center gap-4">
+    <div className="relative">
       <Label htmlFor={id} className="text-right">
         {label}
       </Label>

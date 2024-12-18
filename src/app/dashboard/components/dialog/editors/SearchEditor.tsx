@@ -9,7 +9,7 @@ interface SearchEditorProps {
   label: string;
   value: string;
   onChange: (value: string) => void;
-  options: string[]; // Array of options to suggest from
+  options: string[];
 }
 
 const SearchEditor: React.FC<SearchEditorProps> = ({

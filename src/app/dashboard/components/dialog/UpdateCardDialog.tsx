@@ -10,8 +10,8 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { useDataContext } from "@/app/dashboard/providers/DataProvider";
-import TextEditor from "./TextEditor";
-import SelectEditor from "./SelectEditor";
+import TextEditor from "./editors/TextEditor";
+import SelectEditor from "./editors/SelectEditor";
 import { ICard } from "@/app/dashboard/ICard";
 
 interface UpdateCardDialogProps {

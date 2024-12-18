@@ -11,8 +11,8 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { useDataContext } from "@/app/dashboard/providers/DataProvider";
-import TextEditor from "./TextEditor";
-import SelectEditor from "./SelectEditor";
+import TextEditor from "./editors/TextEditor";
+import SelectEditor from "./editors/SelectEditor";
 import { ICard } from "@/app/dashboard/ICard";
 
 interface NewCardDialogProps {
@@ -20,7 +20,7 @@ interface NewCardDialogProps {
   onClose: () => void;
   cardData?: Partial<ICard>; // Partial card data to prefill the dialog
 }
-import SearchEditor from "./SearchEditor";
+import SearchEditor from "./editors/SearchEditor";
 
 const NewCardDialog: React.FC<NewCardDialogProps> = ({
   isOpen,
@@ -35,6 +35,7 @@ const NewCardDialog: React.FC<NewCardDialogProps> = ({
   const [subCategory, setSubCategory] = useState(cardData.subCategory || "");
   const [swimlane, setSwimlane] = useState(cardData.swimlane || "");
   const [type, setType] = useState<ICard["type"]>(cardData.type || "bullet");
+  const [date, setDate] = useState("");
 
   // // Derive options dynamically from existing cards
   const categories = Array.from(catObjs.map((category) => category.category));
