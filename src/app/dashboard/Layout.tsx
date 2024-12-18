@@ -16,10 +16,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     <div className="flex h-screen overflow-hidden">
       {/* Sidebar with max width defined */}
       <div className="flex-shrink-0 max-w-xs w-full">
-        <Sidebar
-          categories={categories}
-          onSelect={(item) => setActiveContent(item)}
-        />
+        <Sidebar />
       </div>
 
       {/* Main Content Area */}
