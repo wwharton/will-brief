@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -35,7 +35,7 @@ const NewCardDialog: React.FC<NewCardDialogProps> = ({
   const [subCategory, setSubCategory] = useState(cardData.subCategory || "");
   const [swimlane, setSwimlane] = useState(cardData.swimlane || "");
   const [type, setType] = useState<ICard["type"]>(cardData.type || "bullet");
-  const [date, setDate] = useState("");
+  // const [date, setDate] = useState("");
 
   // // Derive options dynamically from existing cards
   const categories = Array.from(catObjs.map((category) => category.category));

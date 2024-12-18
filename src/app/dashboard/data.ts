@@ -9,6 +9,7 @@ export const initialCards: ICard[] = [
       title: "Self Serve Order Status",
       content: "Customer can see their order status in their profile",
       type: "bullet",
+      lexKey: "1 - End State:Define Success:1 - User Story:0001",
     },
     {
       id: "2",
@@ -19,6 +20,7 @@ export const initialCards: ICard[] = [
       parent: "",
       content: "Customer emails regarding order status down by 90%",
       type: "bullet",
+      lexKey: "1 - End State:Define Success:2 - KPIs:0002",
     },
     {
       id: "3",
@@ -29,6 +31,7 @@ export const initialCards: ICard[] = [
       content: "returns record from table",
       parent: "5",
       type: "endpoint",
+      lexKey: "2 - Engineering Design:Backend:API:0003",
     },
     {
       id: "4",
@@ -39,6 +42,7 @@ export const initialCards: ICard[] = [
       content: "cols include: status, tracking_id",
       parent: "3",
       type: "table",
+      lexKey: "2 - Engineering Design:Backend:Database:0004",
     },
     {
       id: "5",
@@ -48,5 +52,6 @@ export const initialCards: ICard[] = [
       title: "<OrderStatus />",
       content: "Component under <UserProfile />",
       type: "table",
+      lexKey: "2 - Engineering Design:Frontend:User Profile:0005",
     },
   ];
