@@ -3,6 +3,7 @@
 import React, { createContext, useContext, useState, ReactNode, useMemo } from "react";
 import { ICard } from "@/app/dashboard/ICard";
 import { initialCards } from "@/app/dashboard/data";
+import { sub } from "date-fns";
 
 interface Category {
   category: string;
@@ -11,7 +12,9 @@ interface Category {
 
 interface DataContextType {
   categories: Category[];
+  subcategories: string[];
   cards: ICard[];
+  swimlanes: string[];
   createCard: (cardData: Partial<ICard>) => void;
   updateCard: (id: string, updatedCard: Partial<ICard>) => void;
   deleteCard: (id: string) => void;
@@ -41,6 +44,23 @@ export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       }));
   }, [cards]);
 
+  const subcategories = useMemo(() => {
+    const subcategorySet = new Set<string>();
+    cards.forEach((card) => {
+      subcategorySet.add(card.subCategory);
+    });
+    return Array.from(subcategorySet).sort((a, b) => a.localeCompare(b));
+  }, [cards]);
+
+  const swimlanes = useMemo(() => {
+    const swimlaneSet = new Set<string>();
+    cards.forEach((card) => {
+      swimlaneSet.add(card.swimlane);
+    });
+    return Array.from(swimlaneSet).sort((a, b) => a.localeCompare(b));
+  }, [cards]);
+
+
   // Create a new card
   const createCard = (cardData: Partial<ICard>) => {
     const newCard: ICard = { id: crypto.randomUUID(), ...cardData };
@@ -60,7 +80,7 @@ export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   };
 
   return (
-    <DataContext.Provider value={{ categories, cards, createCard, updateCard, deleteCard }}>
+    <DataContext.Provider value={{ categories, subcategories, swimlanes, cards, createCard, updateCard, deleteCard }}>
       {children}
     </DataContext.Provider>
   );

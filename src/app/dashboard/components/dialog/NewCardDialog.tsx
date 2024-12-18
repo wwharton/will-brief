@@ -20,13 +20,14 @@ interface NewCardDialogProps {
   onClose: () => void;
   cardData?: Partial<ICard>; // Partial card data to prefill the dialog
 }
+import SearchEditor from "./SearchEditor";
 
 const NewCardDialog: React.FC<NewCardDialogProps> = ({
   isOpen,
   onClose,
   cardData = {},
 }) => {
-  const { createCard } = useDataContext();
+  const { createCard, categories: catObjs, subcategories, swimlanes } = useDataContext();
 
   const [title, setTitle] = useState(cardData.title || "");
   const [content, setContent] = useState(cardData.content || "");
@@ -34,6 +35,11 @@ const NewCardDialog: React.FC<NewCardDialogProps> = ({
   const [subCategory, setSubCategory] = useState(cardData.subCategory || "");
   const [swimlane, setSwimlane] = useState(cardData.swimlane || "");
   const [type, setType] = useState<ICard["type"]>(cardData.type || "bullet");
+
+  // // Derive options dynamically from existing cards
+  const categories = Array.from(catObjs.map((category) => category.category));
+  // const subCategories = Array.from(new Set(cards.map((card) => card.subCategory)));
+  // const swimlanes = Array.from(new Set(cards.map((card) => card.swimlane)));
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -49,13 +55,6 @@ const NewCardDialog: React.FC<NewCardDialogProps> = ({
 
     onClose();
   };
-
-  const cardTypeOptions = [
-    { label: "Bullet", value: "bullet" },
-    { label: "Table", value: "table" },
-    { label: "Column", value: "column" },
-    { label: "Endpoint", value: "endpoint" },
-  ];
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -76,20 +75,38 @@ const NewCardDialog: React.FC<NewCardDialogProps> = ({
               onChange={setContent}
               multiline
             />
-            <TextEditor id="category" label="Category" value={category} onChange={setCategory} />
-            <TextEditor
+            <SearchEditor
+              id="category"
+              label="Category"
+              value={category}
+              onChange={setCategory}
+              options={categories}
+            />
+            <SearchEditor
               id="subCategory"
               label="SubCategory"
               value={subCategory}
               onChange={setSubCategory}
+              options={subcategories}
             />
-            <TextEditor id="swimlane" label="Swimlane" value={swimlane} onChange={setSwimlane} />
+            <SearchEditor
+              id="swimlane"
+              label="Swimlane"
+              value={swimlane}
+              onChange={setSwimlane}
+              options={swimlanes}
+            />
             <SelectEditor
               id="type"
               label="Type"
               value={type}
               onChange={setType}
-              options={cardTypeOptions}
+              options={[
+                { label: "Bullet", value: "bullet" },
+                { label: "Table", value: "table" },
+                { label: "Column", value: "column" },
+                { label: "Endpoint", value: "endpoint" },
+              ]}
             />
           </div>
           <DialogFooter>
