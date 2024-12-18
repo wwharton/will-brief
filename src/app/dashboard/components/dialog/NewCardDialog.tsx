@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -10,10 +9,10 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
 import { useDataContext } from "@/app/dashboard/providers/DataProvider";
+import TextEditor from "./TextEditor";
+import SelectEditor from "./SelectEditor";
 import { ICard } from "@/app/dashboard/ICard";
 
 interface NewCardDialogProps {
@@ -29,8 +28,8 @@ const NewCardDialog: React.FC<NewCardDialogProps> = ({
 }) => {
   const { createCard } = useDataContext();
 
-  const [cardTitle, setCardTitle] = useState(cardData.title || "");
-  const [cardContent, setCardContent] = useState(cardData.content || "");
+  const [title, setTitle] = useState(cardData.title || "");
+  const [content, setContent] = useState(cardData.content || "");
   const [category, setCategory] = useState(cardData.category || "");
   const [subCategory, setSubCategory] = useState(cardData.subCategory || "");
   const [swimlane, setSwimlane] = useState(cardData.swimlane || "");
@@ -39,18 +38,24 @@ const NewCardDialog: React.FC<NewCardDialogProps> = ({
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Create the card with the provided data
     createCard({
+      title,
+      content,
       category,
       subCategory,
       swimlane,
-      content: cardContent,
       type,
     });
 
-    // Close the dialog after submission
     onClose();
   };
+
+  const cardTypeOptions = [
+    { label: "Bullet", value: "bullet" },
+    { label: "Table", value: "table" },
+    { label: "Column", value: "column" },
+    { label: "Endpoint", value: "endpoint" },
+  ];
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -63,88 +68,29 @@ const NewCardDialog: React.FC<NewCardDialogProps> = ({
         </DialogHeader>
         <form onSubmit={handleSubmit}>
           <div className="grid gap-4 py-4">
-            {/* Card Content */}
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="content" className="text-right">
-                Title
-              </Label>
-              <Textarea
-                id="title"
-                value={cardTitle}
-                onChange={(e) => setCardTitle(e.target.value)}
-                className="col-span-3"
-              />
-            </div>
-
-            {/* Card Content */}
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="content" className="text-right">
-                Content
-              </Label>
-              <Textarea
-                id="content"
-                value={cardContent}
-                onChange={(e) => setCardContent(e.target.value)}
-                className="col-span-3"
-              />
-            </div>
-
-            {/* Category */}
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="category" className="text-right">
-                Category
-              </Label>
-              <Input
-                id="category"
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
-                className="col-span-3"
-              />
-            </div>
-
-            {/* SubCategory */}
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="subCategory" className="text-right">
-                SubCategory
-              </Label>
-              <Input
-                id="subCategory"
-                value={subCategory}
-                onChange={(e) => setSubCategory(e.target.value)}
-                className="col-span-3"
-              />
-            </div>
-
-            {/* SwimLane */}
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="swimlane" className="text-right">
-                Swimlane
-              </Label>
-              <Input
-                id="swimlane"
-                value={swimlane}
-                onChange={(e) => setSwimlane(e.target.value)}
-                className="col-span-3"
-              />
-            </div>
-
-            {/* Card Type */}
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="type" className="text-right">
-                Type
-              </Label>
-              <select
-                id="type"
-                value={type}
-                onChange={(e) => setType(e.target.value as ICard["type"])}
-                className="col-span-3 border rounded p-2"
-              >
-                <option value="bullet">Bullet</option>
-                <option value="table">Table</option>
-                <option value="column">Column</option>
-                <option value="endpoint">Endpoint</option>
-              </select>
-            </div>
+            <TextEditor id="title" label="Title" value={title} onChange={setTitle} />
+            <TextEditor
+              id="content"
+              label="Content"
+              value={content}
+              onChange={setContent}
+              multiline
+            />
+            <TextEditor id="category" label="Category" value={category} onChange={setCategory} />
+            <TextEditor
+              id="subCategory"
+              label="SubCategory"
+              value={subCategory}
+              onChange={setSubCategory}
+            />
+            <TextEditor id="swimlane" label="Swimlane" value={swimlane} onChange={setSwimlane} />
+            <SelectEditor
+              id="type"
+              label="Type"
+              value={type}
+              onChange={setType}
+              options={cardTypeOptions}
+            />
           </div>
           <DialogFooter>
             <Button type="submit">Save Card</Button>
