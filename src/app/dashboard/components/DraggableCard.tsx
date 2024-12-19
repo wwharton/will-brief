@@ -25,14 +25,15 @@ const DraggableCard: React.FC<DraggableCardProps> = ({
 
   useEffect(() => {
     const el = ref.current;
-    invariant(el); // Ensure the ref is assigned
+    invariant(el);
 
     return draggable({
       element: el,
-      onDragStart: () => setDragging(true), // Set dragging state to true when drag starts
-      onDrop: () => setDragging(false), // Set dragging state to false when drag ends
+      getInitialData: () => ({ cardId: id }), // Provide card ID as draggable data
+      onDragStart: () => setDragging(true),
+      onDrop: () => setDragging(false),
     });
-  }, []);
+  }, [id]);
 
   return (
     <div

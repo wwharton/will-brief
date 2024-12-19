@@ -10,7 +10,7 @@ interface DroppableSwimlaneProps {
   category: string;
   subCategory: string;
   children?: React.ReactNode;
-  onDrop?: (swimlaneTitle: string, droppedElement: HTMLElement | null) => void; // Callback for drop event
+  onDrop?: (swimlaneTitle: string, droppedElement: HTMLElement | null) => void;
 }
 
 const DroppableSwimlane: React.FC<DroppableSwimlaneProps> = ({
@@ -29,6 +29,7 @@ const DroppableSwimlane: React.FC<DroppableSwimlaneProps> = ({
 
     return dropTargetForElements({
       element: el,
+      getData: () => ({ swimlane: title }), // Surface the swimlane title
       onDragEnter: () => setIsDraggedOver(true),
       onDragLeave: () => setIsDraggedOver(false),
       onDrop: ({ source }) => {

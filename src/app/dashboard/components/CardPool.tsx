@@ -1,16 +1,16 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { useDataContext } from "@/app/dashboard/providers/DataProvider";
 import DroppableSwimLane from "@/app/dashboard/components/DroppableSwimLane";
 import DraggableCard from "@/app/dashboard/components/DraggableCard";
 import { useNavigationContext } from "@/app/dashboard/providers/NavigationProvider";
 import { useDialogContext } from "@/app/dashboard/providers/DialogProvider";
-
+import { monitorForElements } from '@atlaskit/pragmatic-drag-and-drop/element/adapter';
 import { ICard } from "@/app/dashboard/ICard";
 
 const CardPool: React.FC = () => {
-  const { cards } = useDataContext();
+  const { cards, updateCard } = useDataContext();
   const { activeCategory, activeSubcategory } = useNavigationContext();
   const { openDialog } = useDialogContext();
 
@@ -20,6 +20,32 @@ const CardPool: React.FC = () => {
     acc[card.swimlane].push(card);
     return acc;
   }, {} as Record<string, ICard[]>);
+
+  useEffect(() => {
+    return monitorForElements({
+      onDrop({ source, location }) {
+        const droppedCardId = source.data.cardId as string;
+        const targetSwimlane = location.current.dropTargets[0]?.data?.swimlane as string;
+        if (!droppedCardId || !targetSwimlane) {
+          console.log('Invalid drop', droppedCardId, targetSwimlane);
+          return; 
+        }
+  
+        // Update the card's swimlane and lexKey
+        const droppedCard = cards.find((card) => card.id === droppedCardId);
+        console.log('dropped card', droppedCard);
+        if (droppedCard) {
+          const newLexKey = droppedCard.lexKey.replace(/(?<=:\w+:)\w+/, targetSwimlane);
+  
+          updateCard(droppedCardId, {
+            swimlane: targetSwimlane,
+            lexKey: newLexKey,
+          });
+        }
+      },
+    });
+  }, [cards, updateCard]);
+  
 
   return (
     <div className="p-4 h-full">
@@ -38,6 +64,7 @@ const CardPool: React.FC = () => {
                 id={card.id}
                 title={card.title}
                 content={card.content}
+                data-card-id={card.id} // Add data attribute for monitor identification
                 onEdit={() => openDialog("update", card)}
                 onDelete={() => openDialog("delete", card)}
               />
