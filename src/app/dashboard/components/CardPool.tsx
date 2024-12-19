@@ -2,8 +2,8 @@
 
 import React from "react";
 import { useDataContext } from "@/app/dashboard/providers/DataProvider";
-import Swimlane from "@/app/dashboard/components/Swimlane";
-import Card from "@/app/dashboard/components/CardComponent";
+import DroppableSwimLane from "@/app/dashboard/components/DroppableSwimLane";
+import DraggableCard from "@/app/dashboard/components/DraggableCard";
 import { useNavigationContext } from "@/app/dashboard/providers/NavigationProvider";
 import { useDialogContext } from "@/app/dashboard/providers/DialogProvider";
 
@@ -26,14 +26,14 @@ const CardPool: React.FC = () => {
       {activeSubcategory && <div className="text-center text-lg font-semibold mb-6">{activeSubcategory}</div>}
       <div className="h-full w-full overflow-x-auto flex space-x-4 pb-8">
         {Object.entries(swimLaneGroups).map(([swimlane, cards]) => (
-          <Swimlane
+          <DroppableSwimLane
             key={swimlane}
             title={swimlane}
             category={activeCategory || ""}
             subCategory={activeSubcategory || ""}
           >
             {cards.map((card) => (
-              <Card
+              <DraggableCard
                 key={card.id}
                 id={card.id}
                 title={card.title}
@@ -42,7 +42,7 @@ const CardPool: React.FC = () => {
                 onDelete={() => openDialog("delete", card)}
               />
             ))}
-          </Swimlane>
+          </DroppableSwimLane>
         ))}
       </div>
     </div>
