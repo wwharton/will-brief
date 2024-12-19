@@ -72,9 +72,15 @@ export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     return acc;
   }, {});
 
+  const lexKey = (card: ICard) => `${card.category}:${card.subCategory}:${card.swimlane}`;
+
   // Create a new card
   const createCard = (cardData: Partial<ICard>) => {
-    const newCard: ICard = { id: crypto.randomUUID(), ...cardData };
+    const newCard: ICard = { 
+      id: crypto.randomUUID(), 
+      lexKey: lexKey(cardData as ICard), 
+      ...cardData 
+    };
     setCards((prev) => [...prev, newCard]);
   };
 
