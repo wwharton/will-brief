@@ -14,6 +14,7 @@ interface DataContextType {
   categories: Category[];
   subcategories: string[];
   cards: ICard[];
+  groupedCards: Record<string, Record<string, Record<string, ICard[]>>>;
   swimlanes: string[];
   createCard: (cardData: Partial<ICard>) => void;
   updateCard: (id: string, updatedCard: Partial<ICard>) => void;
@@ -60,6 +61,16 @@ export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     return Array.from(swimlaneSet).sort((a, b) => a.localeCompare(b));
   }, [cards]);
 
+  const groupedCards = cards.reduce<
+    Record<string, Record<string, Record<string, ICard[]>>>
+  >((acc, card) => {
+    if (!acc[card.category]) acc[card.category] = {};
+    if (!acc[card.category][card.subCategory]) acc[card.category][card.subCategory] = {};
+    if (!acc[card.category][card.subCategory][card.swimlane])
+      acc[card.category][card.subCategory][card.swimlane] = [];
+    acc[card.category][card.subCategory][card.swimlane].push(card);
+    return acc;
+  }, {});
 
   // Create a new card
   const createCard = (cardData: Partial<ICard>) => {
@@ -80,7 +91,7 @@ export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   };
 
   return (
-    <DataContext.Provider value={{ categories, subcategories, swimlanes, cards, createCard, updateCard, deleteCard }}>
+    <DataContext.Provider value={{ categories, subcategories, swimlanes, cards, groupedCards, createCard, updateCard, deleteCard }}>
       {children}
     </DataContext.Provider>
   );
