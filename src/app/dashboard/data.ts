@@ -1,5 +1,16 @@
 import { ICard } from "@/app/dashboard/ICard";
 
+const cardDataKey = Symbol('card');
+export type TCardData = { [cardDataKey]: true; cardId: ICard['id'] };
+
+export function getCardData(card: ICard): TCardData {
+  return { [cardDataKey]: true, cardId: card.id };
+}
+
+export function isCardData(data: Record<string | symbol, unknown>): data is TCardData {
+  return data[cardDataKey] === true;
+}
+
 export const initialCards: ICard[] = [
     {
       id: "1",

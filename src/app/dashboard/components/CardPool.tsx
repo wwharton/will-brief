@@ -21,32 +21,6 @@ const CardPool: React.FC = () => {
     return acc;
   }, {} as Record<string, ICard[]>);
 
-  useEffect(() => {
-    return monitorForElements({
-      onDrop({ source, location }) {
-        const droppedCardId = source.data.cardId as string;
-        const targetSwimlane = location.current.dropTargets[0]?.data?.swimlane as string;
-        if (!droppedCardId || !targetSwimlane) {
-          console.log('Invalid drop', droppedCardId, targetSwimlane);
-          return; 
-        }
-  
-        // Update the card's swimlane and lexKey
-        const droppedCard = cards.find((card) => card.id === droppedCardId);
-        console.log('dropped card', droppedCard);
-        if (droppedCard) {
-          const newLexKey = droppedCard.lexKey.replace(/(?<=:\w+:)\w+/, targetSwimlane);
-  
-          updateCard(droppedCardId, {
-            swimlane: targetSwimlane,
-            lexKey: newLexKey,
-          });
-        }
-      },
-    });
-  }, [cards, updateCard]);
-  
-
   return (
     <div className="p-4 h-full">
       {activeSubcategory && <div className="text-center text-lg font-semibold mb-6">{activeSubcategory}</div>}
@@ -61,9 +35,7 @@ const CardPool: React.FC = () => {
             {cards.map((card) => (
               <DraggableCard
                 key={card.id}
-                id={card.id}
-                title={card.title}
-                content={card.content}
+                card={card}
                 data-card-id={card.id} // Add data attribute for monitor identification
                 onEdit={() => openDialog("update", card)}
                 onDelete={() => openDialog("delete", card)}

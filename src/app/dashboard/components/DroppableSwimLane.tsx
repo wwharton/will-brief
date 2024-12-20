@@ -1,16 +1,19 @@
 "use client";
 
 import React, { useRef, useEffect, useState } from "react";
-import Swimlane from "@/app/dashboard/components/Swimlane"; // Import the Swimlane component
-import { dropTargetForElements } from '@atlaskit/pragmatic-drag-and-drop/element/adapter';
-import { invariant } from "@/app/utils"; // Replace or implement as needed
+import Swimlane from "@/app/dashboard/components/Swimlane";
+import {
+  dropTargetForElements,
+  monitorForElements,
+} from "@atlaskit/pragmatic-drag-and-drop/element/adapter";
+import { invariant } from "@/app/utils";
+import { useDataContext } from "../providers/DataProvider";
 
 interface DroppableSwimlaneProps {
   title: string;
   category: string;
   subCategory: string;
   children?: React.ReactNode;
-  onDrop?: (swimlaneTitle: string, droppedElement: HTMLElement | null) => void;
 }
 
 const DroppableSwimlane: React.FC<DroppableSwimlaneProps> = ({
@@ -18,10 +21,10 @@ const DroppableSwimlane: React.FC<DroppableSwimlaneProps> = ({
   category,
   subCategory,
   children,
-  onDrop,
 }) => {
   const ref = useRef<HTMLDivElement | null>(null);
   const [isDraggedOver, setIsDraggedOver] = useState(false);
+//   const { cards, updateCard } = useDataContext();
 
   useEffect(() => {
     const el = ref.current;
@@ -29,17 +32,16 @@ const DroppableSwimlane: React.FC<DroppableSwimlaneProps> = ({
 
     return dropTargetForElements({
       element: el,
-      getData: () => ({ swimlane: title }), // Surface the swimlane title
+      getData: () => ({ swimlane: title }), // Surface swimlane title
       onDragEnter: () => setIsDraggedOver(true),
       onDragLeave: () => setIsDraggedOver(false),
-      onDrop: ({ source }) => {
+      onDrop({ location, self }) {
+        // Check if this swimlane is the direct target of the drop
+        console.log("Card dropped on swimlane:", title);
         setIsDraggedOver(false);
-        if (onDrop) {
-          onDrop(title, source.element);
-        }
       },
     });
-  }, [onDrop, title]);
+  }, [title]);
 
   return (
     <div
