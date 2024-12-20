@@ -73,9 +73,6 @@ const DocumentView: React.FC = () => {
   const [editingCardId, setEditingCardId] = useState<string | null>(null);
   const [editedContent, setEditedContent] = useState<string>("");
 
-  const lexKeySort = (a: { lexKey: string }, b: { lexKey: string }) =>
-    a.lexKey.localeCompare(b.lexKey);
-
   const handleDoubleClick = (cardId: string, currentContent: string) => {
     setEditingCardId(cardId);
     setEditedContent(currentContent);
@@ -104,7 +101,7 @@ const DocumentView: React.FC = () => {
               <RenderSubCategory key={subcategory} title={subcategory}>
                 {Object.entries(swimlanes).map(([swimlane, cards]) => (
                   <RenderSwimlane key={swimlane} title={swimlane}>
-                    {cards.sort(lexKeySort).map(({ id, title, content }) => (
+                    {cards.map(({ id, title, content }) => (
                       <RenderTitleContent
                         key={id}
                         id={id}

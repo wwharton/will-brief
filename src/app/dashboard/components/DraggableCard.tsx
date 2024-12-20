@@ -1,6 +1,6 @@
 "use client";
 
-import React, { type HTMLAttributes, useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import Card from "@/app/dashboard/components/CardComponent";
 import {
     draggable,
@@ -38,10 +38,6 @@ type CardState =
   | {
       type: 'is-dragging-over';
       closestEdge: Edge | null;
-    };
-
-const stateStyles: { [Key in CardState['type']]?: HTMLAttributes<HTMLDivElement>['className'] } = {
-    'is-dragging': 'opacity-40',
     };
     
 const idle: CardState = { type: 'idle' };
@@ -118,7 +114,7 @@ const DraggableCard: React.FC<DraggableCardProps> = ({
           }),
     
         );
-  }, [id]);
+  }, [id, card]);
 
   return (
     <>
@@ -130,7 +126,6 @@ const DraggableCard: React.FC<DraggableCardProps> = ({
             }`}
             >
             <Card
-                id={id}
                 title={title}
                 content={content}
                 onEdit={onEdit}

@@ -1,17 +1,13 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import Sidebar from "@/app/dashboard/components/Sidebar";
-import { useDataContext } from "@/app/dashboard/providers/DataProvider";
 
 interface LayoutProps {
   children: React.ReactNode;
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
-  const { categories } = useDataContext();
-  const [activeContent, setActiveContent] = useState<string>("Welcome");
-
   return (
     <div className="flex h-screen overflow-hidden">
       {/* Sidebar with max width defined */}

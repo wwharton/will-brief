@@ -35,12 +35,9 @@ const NewCardDialog: React.FC<NewCardDialogProps> = ({
   const [subCategory, setSubCategory] = useState(cardData.subCategory || "");
   const [swimlane, setSwimlane] = useState(cardData.swimlane || "");
   const [type, setType] = useState<ICard["type"]>(cardData.type || "bullet");
-  // const [date, setDate] = useState("");
 
   // // Derive options dynamically from existing cards
   const categories = Array.from(catObjs.map((category) => category.category));
-  // const subCategories = Array.from(new Set(cards.map((card) => card.subCategory)));
-  // const swimlanes = Array.from(new Set(cards.map((card) => card.swimlane)));
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -63,7 +60,7 @@ const NewCardDialog: React.FC<NewCardDialogProps> = ({
         <DialogHeader>
           <DialogTitle>Create New Card</DialogTitle>
           <DialogDescription>
-            Enter the details for your new card here. Click save when you're done.
+            Enter the details for your new card here
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit}>

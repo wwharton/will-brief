@@ -21,7 +21,6 @@ import {
 import { Edit, Trash2, MoreVertical } from 'lucide-react'
 
 interface CustomCardProps {
-  id: string
   title?: string
   content: string
   onEdit?: () => void
@@ -38,7 +37,6 @@ const colorOptions = [
 ]
 
 const Card: React.FC<CustomCardProps> = ({
-  id,
   title,
   content,
   onEdit,

@@ -3,7 +3,6 @@
 import React, { createContext, useContext, useState, ReactNode, useMemo } from "react";
 import { ICard } from "@/app/dashboard/ICard";
 import { initialCards } from "@/app/dashboard/data";
-import { sub } from "date-fns";
 
 interface Category {
   category: string;
@@ -76,14 +75,20 @@ export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   // Create a new card
   const createCard = (cardData: Partial<ICard>) => {
-    const newCard: ICard = { 
-      id: crypto.randomUUID(), 
-      lexKey: lexKey(cardData as ICard), 
-      ...cardData 
+    const newCard: ICard = {
+      id: crypto.randomUUID(),
+      lexKey: lexKey(cardData as ICard),
+      category: cardData.category || "Default Category",
+      subCategory: cardData.subCategory || "Default SubCategory",
+      swimlane: cardData.swimlane || "Default Swimlane",
+      title: cardData.title || "Untitled",
+      content: cardData.content || "",
+      parent: cardData.parent || undefined,
+      type: cardData.type || "bullet",
     };
+  
     setCards((prev) => [...prev, newCard]);
   };
-
   // Update an existing card
   const updateCard = (id: string, updatedCard: Partial<ICard>) => {
     setCards((prev) =>

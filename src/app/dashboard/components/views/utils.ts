@@ -1,4 +1,4 @@
-export const generateSlides = (cards: Array<{ id: string; category: string; subCategory: string; swimlane: string; content: string }>) => {
+export const generateSlides = (cards: Array<{ id: string; title: string; category: string; subCategory: string; swimlane: string; content: string }>) => {
     const groupedSlides: Record<
       string,
       Record<string, Record<string, { id: string; title: string; content: string }[]>>

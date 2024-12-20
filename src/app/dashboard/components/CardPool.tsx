@@ -1,16 +1,15 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React from "react";
 import { useDataContext } from "@/app/dashboard/providers/DataProvider";
 import DroppableSwimLane from "@/app/dashboard/components/DroppableSwimLane";
 import DraggableCard from "@/app/dashboard/components/DraggableCard";
 import { useNavigationContext } from "@/app/dashboard/providers/NavigationProvider";
 import { useDialogContext } from "@/app/dashboard/providers/DialogProvider";
-import { monitorForElements } from '@atlaskit/pragmatic-drag-and-drop/element/adapter';
 import { ICard } from "@/app/dashboard/ICard";
 
 const CardPool: React.FC = () => {
-  const { cards, updateCard } = useDataContext();
+  const { cards } = useDataContext();
   const { activeCategory, activeSubcategory } = useNavigationContext();
   const { openDialog } = useDialogContext();
 
