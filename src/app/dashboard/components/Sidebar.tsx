@@ -29,7 +29,7 @@ const Sidebar: React.FC = () => {
     <div className="h-full p-4 bg-slate-900 text-white flex flex-col">
       {/* Header */}
       <div className="flex items-center justify-between text-lg font-semibold mb-6">
-        <span>JPP EDD Demo</span>
+        <span>Will-Brief Demo</span>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button size="sm" className="bg-slate-900">
