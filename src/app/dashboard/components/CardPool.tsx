@@ -22,9 +22,11 @@ const CardPool: React.FC = () => {
   }, {} as Record<string, ICard[]>);
 
   return (
-    <div className="p-4 h-full">
-      {activeSubcategory && <div className="text-center text-lg font-semibold mb-6">{activeSubcategory}</div>}
-      <div className="h-full w-full overflow-x-auto flex space-x-4 pb-8">
+    <div className="p-4 h-full overflow-x-auto">
+      {activeSubcategory && (
+        <div className="text-center text-lg font-semibold mb-6">{activeSubcategory}</div>
+      )}
+      <div className="h-full flex space-x-6 pb-8" style={{ padding: "20px" }}>
         {Object.entries(swimLaneGroups).map(([swimlane, cards]) => (
           <DroppableSwimLane
             key={swimlane}
