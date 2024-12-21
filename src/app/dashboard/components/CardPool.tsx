@@ -37,7 +37,7 @@ const CardPool: React.FC = () => {
               <DraggableCard
                 key={card.id}
                 card={card}
-                data-card-id={card.id} // Add data attribute for monitor identification
+                data-card-id={card.id}
                 onEdit={() => openDialog("update", card)}
                 onDelete={() => openDialog("delete", card)}
               />

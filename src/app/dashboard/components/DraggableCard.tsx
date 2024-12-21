@@ -1,3 +1,5 @@
+// DraggableCard.tsx
+
 "use client";
 
 import React, { useRef, useEffect, useState } from "react";
@@ -41,7 +43,7 @@ const DraggableCard: React.FC<DraggableCardProps> = ({
   const [dragging, setDragging] = useState<boolean>(false);
   const [state, setState] = useState<CardState>(idle);
 
-  const { updateCard } = useDataContext();
+  const { updateCard, reRankCard } = useDataContext(); // Access reRankCard
 
   const { title, content, id, swimlane } = card;
 
@@ -106,7 +108,7 @@ const DraggableCard: React.FC<DraggableCardProps> = ({
           setState(idle);
           setDragging(false);
         },
-        onDrop({ source }) {
+        onDrop({ self, source }) {
           setState(idle);
           setDragging(false);
 
@@ -114,14 +116,26 @@ const DraggableCard: React.FC<DraggableCardProps> = ({
             const sourceCard: ICard = source.data;
             const targetSwimlane = swimlane;
 
+            // Update swimlane if different
             if (sourceCard.swimlane !== targetSwimlane) {
               updateCard(sourceCard.id, { swimlane: targetSwimlane });
             }
+
+            // Re-rank based on drop edge
+            console.log('try to re-rank on drop')
+            const closestEdge = extractClosestEdge(self.data);
+            console.log('closestEdge', closestEdge)
+
+            // Determine the edge based on the drop indicator
+            const edge: "top" | "bottom" = closestEdge === "top" ? "top" : "bottom";
+            console.log('edge', edge)
+
+            reRankCard(sourceCard.id, id, edge); // sourceCard is being moved relative to 'id' (target card)
           }
         },
       })
     );
-  }, [id, card, updateCard, swimlane]);
+  }, [id, card, updateCard, reRankCard, swimlane]);
 
   return (
     <div className="relative">
