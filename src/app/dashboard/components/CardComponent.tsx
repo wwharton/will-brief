@@ -28,12 +28,12 @@ interface CustomCardProps {
 }
 
 const colorOptions = [
-  { name: "Default", class: "bg-card" },
-  { name: "Blue", class: "bg-blue-200" },
-  { name: "Green", class: "bg-green-200" },
-  { name: "Yellow", class: "bg-yellow-200" },
-  { name: "Red", class: "bg-pink-200" },
-  { name: "Purple", class: "bg-purple-200" },
+  { name: "Default", class: "bg-card text-card-foreground" },
+  { name: "Primary", class: "bg-primary text-primary-foreground" },
+  { name: "Secondary", class: "bg-secondary text-secondary-foreground" },
+  { name: "Accent", class: "bg-accent text-accent-foreground" },
+  { name: "Muted", class: "bg-muted text-muted-foreground" },
+  { name: "Destructive", class: "bg-destructive text-destructive-foreground" },
 ]
 
 const Card: React.FC<CustomCardProps> = ({
@@ -42,10 +42,10 @@ const Card: React.FC<CustomCardProps> = ({
   onEdit,
   onDelete,
 }) => {
-  const [cardColor, setCardColor] = useState("bg-blue-200")
+  const [cardColor, _] = useState("bg-secondary text-secondary-foreground")
 
   return (
-    <ShadcnCard className={`w-full ${cardColor} relative`}>
+    <ShadcnCard className={`w-full ${cardColor} relative border rounded-[--radius]`}>
       <CardHeader>
         <div className="flex justify-between items-start">
           <CardTitle>{title}</CardTitle>
@@ -57,14 +57,14 @@ const Card: React.FC<CustomCardProps> = ({
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>Card Options</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuLabel>Change Color</DropdownMenuLabel>
-              {colorOptions.map((color) => (
+              {/* <DropdownMenuSeparator /> */}
+              {/* <DropdownMenuLabel>Change Color</DropdownMenuLabel> */}
+              {/* {colorOptions.map((color) => (
                 <DropdownMenuItem key={color.class} onClick={() => setCardColor(color.class)}>
-                  <div className={`w-4 h-4 rounded-full ${color.class} mr-2`} />
+                  <div className={`w-4 h-4 rounded-full ${color.class} mr-2 border`} />
                   {color.name}
                 </DropdownMenuItem>
-              ))}
+              ))} */}
               <DropdownMenuSeparator />
               {onDelete && (
                 <DropdownMenuItem onClick={onDelete}>

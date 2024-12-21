@@ -10,7 +10,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { useDataContext } from "@/app/dashboard/providers/DataProvider";
 import { useNavigationContext } from "@/app/dashboard/providers/NavigationProvider";
-import { Plus, File, Trash2, Search, Layers, ChevronDown, Presentation } from "lucide-react";
+import { Plus, File, Trash2, Search, Layers, ChevronDown, Presentation } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -26,13 +26,13 @@ const Sidebar: React.FC = () => {
   const { openDialog } = useDialogContext();
 
   return (
-    <div className="h-full p-4 bg-slate-900 text-white flex flex-col">
+    <div className="h-full p-4 bg-background text-foreground flex flex-col border-r border-border">
       {/* Header */}
       <div className="flex items-center justify-between text-lg font-semibold mb-6">
         <span>Will-Brief Demo</span>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button size="sm" className="bg-slate-900">
+            <Button variant="ghost" size="sm">
               <ChevronDown className="h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
@@ -46,17 +46,17 @@ const Sidebar: React.FC = () => {
 
       {/* Button Row */}
       <div className="flex justify-between items-center text-sm space-x-2 mb-6">
-        <Button size="sm" className="flex items-center space-x-1 bg-slate-900">
+        <Button variant="outline" size="sm" className="flex items-center space-x-1">
           <Search className="h-4 w-4" />
           <span>Jump to</span>
         </Button>
-        <Button size="sm" className="flex items-center space-x-1 bg-slate-900">
+        <Button variant="outline" size="sm" className="flex items-center space-x-1">
           <Layers className="h-4 w-4" />
           <span>Cards</span>
         </Button>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button size="sm" className="flex items-center space-x-1 bg-slate-900">
+            <Button variant="outline" size="sm" className="flex items-center space-x-1">
               <Trash2 className="h-4 w-4" />
               <ChevronDown className="h-4 w-4" />
             </Button>
@@ -84,12 +84,13 @@ const Sidebar: React.FC = () => {
             <AccordionContent>
               <ul className="py-2 space-y-1">
                 {category.items.map((item) => (
-                    // if active category is this category, always display it as if it were hovered
                   <li
                     key={item}
-                    //  if active category != category.catgory, then hover bg and text color
-                    // else always be highlighted
-                    className={activeSubcategory === item ? "bg-accent text-accent-foreground rounded-lg p-2" : "hover:bg-accent hover:text-accent-foreground rounded-lg p-2 cursor-pointer"}
+                    className={`rounded-md p-2 cursor-pointer ${
+                      activeSubcategory === item
+                        ? "bg-accent text-accent-foreground"
+                        : "hover:bg-accent hover:text-accent-foreground"
+                    }`}
                     onClick={() => {
                       setActiveCategory(category.category);
                       setActiveSubcategory(item);
@@ -105,9 +106,7 @@ const Sidebar: React.FC = () => {
         ))}
       </Accordion>
 
-
       {/* Design Presentation Section */}
-      {/* Project File */}
       <div className="flex justify-between items-center text-sm mb-1">
         <div className="flex items-center space-x-2">
           <Presentation className="h-4 w-4" />
@@ -115,31 +114,27 @@ const Sidebar: React.FC = () => {
         </div>
       </div>
 
-
       <ul className="space-y-1">
         {["Presentation", "Document", "Diagram"].map((item) => (
           <li
-          key={item}
-          className="py-2 px-4 hover:bg-accent hover:text-accent-foreground rounded-md cursor-pointer"
-          onClick={() => {
-            setActiveView(item);
-            setActiveCategory(null);
-            setActiveSubcategory(null);
-          }}
-        >
-          {item}
-        </li>
-          ))
-        }
-          
-          
-        </ul>
+            key={item}
+            className="py-2 px-4 hover:bg-accent hover:text-accent-foreground rounded-md cursor-pointer"
+            onClick={() => {
+              setActiveView(item);
+              setActiveCategory(null);
+              setActiveSubcategory(null);
+            }}
+          >
+            {item}
+          </li>
+        ))}
+      </ul>
 
       {/* New Card Button */}
       <div className="mt-auto">
         <Button
           onClick={() => {openDialog("new")}}
-          className="w-full bg-primary text-white hover:bg-primary-hover flex items-center justify-center py-4 rounded-lg"
+          className="w-full"
         >
           <Plus className="mr-2 h-5 w-5" />
           New Card
@@ -150,3 +145,4 @@ const Sidebar: React.FC = () => {
 };
 
 export default Sidebar;
+

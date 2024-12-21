@@ -14,8 +14,8 @@ interface NavigationContextType {
 const NavigationContext = createContext<NavigationContextType | undefined>(undefined);
 
 export const NavigationProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [activeCategory, setActiveCategory] = useState<string | null>(null);
-  const [activeSubcategory, setActiveSubcategory] = useState<string | null>(null);
+  const [activeCategory, setActiveCategory] = useState<string | null>('1 - End State');
+  const [activeSubcategory, setActiveSubcategory] = useState<string | null>('Define Success');
   const [activeView, setActiveView] = useState<string | null>(null);
 
   return (
