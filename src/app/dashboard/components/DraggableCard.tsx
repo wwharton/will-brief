@@ -43,7 +43,7 @@ const DraggableCard: React.FC<DraggableCardProps> = ({
   const [dragging, setDragging] = useState<boolean>(false);
   const [state, setState] = useState<CardState>(idle);
 
-  const { updateCard, reRankCard } = useDataContext(); // Access reRankCard
+  const { updateCard, reRankCard } = useDataContext();
 
   const { title, content, id, swimlane } = card;
 
@@ -55,8 +55,6 @@ const DraggableCard: React.FC<DraggableCardProps> = ({
       draggable({
         element,
         getInitialData() {
-          console.log('card', card);
-          console.log('getCardData(card)', getCardData(card));
           return getCardData(card);
         }, // Provide card data as draggable data
         onDrag: () => setDragging(true),
@@ -122,13 +120,10 @@ const DraggableCard: React.FC<DraggableCardProps> = ({
             }
 
             // Re-rank based on drop edge
-            console.log('try to re-rank on drop')
             const closestEdge = extractClosestEdge(self.data);
-            console.log('closestEdge', closestEdge)
 
             // Determine the edge based on the drop indicator
             const edge: "top" | "bottom" = closestEdge === "top" ? "top" : "bottom";
-            console.log('edge', edge)
 
             reRankCard(sourceCard.id, id, edge); // sourceCard is being moved relative to 'id' (target card)
           }

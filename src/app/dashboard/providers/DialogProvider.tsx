@@ -22,8 +22,6 @@ const DialogContext = createContext<DialogContextType | undefined>(undefined);
 export const DialogProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [dialogState, setDialogState] = useState<DialogState>({ type: null });
 
-  console.log(dialogState)
-
   const openDialog = (type: DialogType, card: Partial<ICard> = {}) => {
     setDialogState({ type, card });
   };

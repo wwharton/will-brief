@@ -74,7 +74,6 @@ export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   // const lexKey = (card: ICard) => `${card.category}:${card.subCategory}:${card.swimlane}`;
 
-  // Create a new card
   const createCard = (cardData: Partial<ICard>) => {
     const newCard: ICard = {
       id: crypto.randomUUID(),
@@ -91,19 +90,17 @@ export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     setCards((prev) => sortCards([...prev, newCard]));
   };
 
-  // Update an existing card
   const updateCard = (id: string, updatedCard: Partial<ICard>) => {
     setCards((prev) =>
       prev.map((card) => (card.id === id ? { ...card, ...updatedCard } : card))
     );
   };
 
-  // Delete a card
   const deleteCard = (id: string) => {
     setCards((prev) => prev.filter((card) => card.id !== id));
   };
 
-  // I want a function that will sort cards based on Category -> SubCategory -> Swimlane -> Rank
+  // Sort cards based on Category -> SubCategory -> Swimlane -> Rank
   const sortCards = (cards: ICard[]) => {
     return cards.sort((a, b) => {
       if (a.category !== b.category) {
@@ -126,7 +123,7 @@ export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
    * @param edge - 'top' or 'bottom' indicating drop position relative to target.
    */
   const reRankCard = (sourceCardId: string, targetCardId: string, edge: "top" | "bottom") => {
-    console.log("Re-ranking card", sourceCardId, "relative to", targetCardId, "at", edge);
+    // console.log("Re-ranking card", sourceCardId, "relative to", targetCardId, "at", edge);
     setCards((prevCards) => {
       const sourceCard = prevCards.find(card => card.id === sourceCardId);
       const targetCard = prevCards.find(card => card.id === targetCardId);
@@ -154,19 +151,14 @@ export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       let newRank: number;
 
       if (edge === "top") {
-        console.log('detected edge top')
         if (targetIndex === 0) {
           // No card above, set rank to target rank - 100
-          console.log('no card above, set rank to target rank - 100')
           newRank = targetCard.rank - 100;
         } else {
-          console.log('card above, set rank to average of target and above card')
           const aboveCard = swimlaneCards[targetIndex - 1];
           newRank = (aboveCard.rank + targetCard.rank) / 2;
-          console.log('newRank', newRank)
         }
       } else if (edge === "bottom") {
-        console.log('detected edge bottom')
         if (targetIndex === swimlaneCards.length - 1) {
           // No card below, set rank to target rank + 100
           newRank = targetCard.rank + 100;
@@ -175,7 +167,6 @@ export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
           newRank = (targetCard.rank + belowCard.rank) / 2;
         }
       } else {
-        console.warn("Invalid edge value.");
         return prevCards;
       }
 
