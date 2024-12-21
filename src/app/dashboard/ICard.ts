@@ -7,5 +7,6 @@ export interface ICard {
   content: string; // The text content of the card
   parent?: string; // id of parent card, used for diagraming
   type: "bullet" | "table" | "column" | "endpoint"; // The type of the card
-  lexKey: string; // Sorting key composed of Category/SubCategory/Swimlane/Rank
+  // lexKey: string; // Sorting key composed of Category/SubCategory/Swimlane/Rank
+  rank: number;
 }

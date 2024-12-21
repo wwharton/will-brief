@@ -77,7 +77,7 @@ export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const createCard = (cardData: Partial<ICard>) => {
     const newCard: ICard = {
       id: crypto.randomUUID(),
-      lexKey: lexKey(cardData as ICard),
+      // lexKey: lexKey(cardData as ICard),
       category: cardData.category || "Default Category",
       subCategory: cardData.subCategory || "Default SubCategory",
       swimlane: cardData.swimlane || "Default Swimlane",
@@ -85,6 +85,7 @@ export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       content: cardData.content || "",
       parent: cardData.parent || undefined,
       type: cardData.type || "bullet",
+      rank: cards.length * 100
     };
   
     setCards((prev) => [...prev, newCard]);

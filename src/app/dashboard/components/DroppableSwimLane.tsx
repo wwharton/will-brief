@@ -6,6 +6,8 @@ import {
   dropTargetForElements,
 } from "@atlaskit/pragmatic-drag-and-drop/element/adapter";
 import { invariant } from "@/app/utils";
+import { useDataContext } from "@/app/dashboard/providers/DataProvider";
+import { isCardData } from "@/app/dashboard/data";
 
 interface DroppableSwimlaneProps {
   title: string;
@@ -22,6 +24,7 @@ const DroppableSwimlane: React.FC<DroppableSwimlaneProps> = ({
 }) => {
   const ref = useRef<HTMLDivElement | null>(null);
   const [isDraggedOver, setIsDraggedOver] = useState(false);
+  const { updateCard } = useDataContext();
 
   useEffect(() => {
     const el = ref.current;
@@ -32,12 +35,17 @@ const DroppableSwimlane: React.FC<DroppableSwimlaneProps> = ({
       getData: () => ({ swimlane: title }), // Surface swimlane title
       onDragEnter: () => setIsDraggedOver(true),
       onDragLeave: () => setIsDraggedOver(false),
-    //   onDrop({ location, self }) {
-      onDrop() {
-        // Check if this swimlane is the direct target of the drop
-        console.log("Card dropped on swimlane:", title);
-        setIsDraggedOver(false);
-      },
+      onDrop({ source }) {
+        setIsDraggedOver(false)
+        if (isCardData(source.data)) {
+          const sourceCard: any = source.data;
+          const targetSwimlane = title;
+
+          if (sourceCard.swimlane !== targetSwimlane) {
+            updateCard(sourceCard.id, { swimlane: targetSwimlane });
+          }
+        }
+    },
     });
   }, [title]);
 
