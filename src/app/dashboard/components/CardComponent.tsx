@@ -27,14 +27,14 @@ interface CustomCardProps {
   onDelete?: () => void
 }
 
-const colorOptions = [
-  { name: "Default", class: "bg-card text-card-foreground" },
-  { name: "Primary", class: "bg-primary text-primary-foreground" },
-  { name: "Secondary", class: "bg-secondary text-secondary-foreground" },
-  { name: "Accent", class: "bg-accent text-accent-foreground" },
-  { name: "Muted", class: "bg-muted text-muted-foreground" },
-  { name: "Destructive", class: "bg-destructive text-destructive-foreground" },
-]
+// const colorOptions = [
+//   { name: "Default", class: "bg-card text-card-foreground" },
+//   { name: "Primary", class: "bg-primary text-primary-foreground" },
+//   { name: "Secondary", class: "bg-secondary text-secondary-foreground" },
+//   { name: "Accent", class: "bg-accent text-accent-foreground" },
+//   { name: "Muted", class: "bg-muted text-muted-foreground" },
+//   { name: "Destructive", class: "bg-destructive text-destructive-foreground" },
+// ]
 
 const Card: React.FC<CustomCardProps> = ({
   title,
@@ -42,7 +42,7 @@ const Card: React.FC<CustomCardProps> = ({
   onEdit,
   onDelete,
 }) => {
-  const [cardColor, _] = useState("bg-secondary text-secondary-foreground")
+  const [cardColor] = useState("bg-secondary text-secondary-foreground")
 
   return (
     <ShadcnCard className={`w-full ${cardColor} relative border rounded-[--radius]`}>
