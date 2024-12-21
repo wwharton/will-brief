@@ -2,6 +2,9 @@
 
 import React, { useState } from "react";
 import { useDataContext } from "@/app/dashboard/providers/DataProvider";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 const RenderCategory: React.FC<{ title: string; children: React.ReactNode }> = ({ title, children }) => (
   <div>
@@ -11,16 +14,16 @@ const RenderCategory: React.FC<{ title: string; children: React.ReactNode }> = (
 );
 
 const RenderSubCategory: React.FC<{ title: string; children: React.ReactNode }> = ({ title, children }) => (
-  <div>
-    <h3 className="text-lg font-medium">{title}</h3>
-    <ul className="list-disc ml-8">{children}</ul>
+  <div className="mb-4">
+    <h3 className="text-lg font-heavy mb-2">{title}</h3>
+    <ul className="space-y-2">{children}</ul>
   </div>
 );
 
 const RenderSwimlane: React.FC<{ title: string; children: React.ReactNode }> = ({ title, children }) => (
-  <li>
+  <li className="mb-2">
     <div className="font-semibold">{title}</div>
-    <ul className="list-disc ml-8">{children}</ul>
+    <ul className="ml-4 space-y-1">{children}</ul>
   </li>
 );
 
@@ -45,24 +48,20 @@ const RenderTitleContent: React.FC<{
   onSave,
   onCancel,
 }) => (
-  <li key={id} className="mb-2">
+  <li key={id} className="mb-1">
     {editing ? (
       <div className="flex items-center space-x-2">
-        <input
-          className="p-2 border rounded w-full"
+        <Input
           value={editedContent}
           onChange={onContentChange}
+          className="flex-grow"
         />
-        <button className="text-sm px-2 py-1 bg-green-500 text-white rounded" onClick={onSave}>
-          Save
-        </button>
-        <button className="text-sm px-2 py-1 bg-gray-300 text-black rounded" onClick={onCancel}>
-          Cancel
-        </button>
+        <Button size="sm" onClick={onSave}>Save</Button>
+        <Button size="sm" variant="outline" onClick={onCancel}>Cancel</Button>
       </div>
     ) : (
-      <span onDoubleClick={onDoubleClick} className="cursor-pointer">
-        <span className="font-bold">{title}:</span> {content}
+      <span onDoubleClick={onDoubleClick} className="cursor-pointer hover:bg-accent hover:text-accent-foreground p-1 rounded">
+        <span className="font-medium">{title}:</span> {content}
       </span>
     )}
   </li>
@@ -92,8 +91,8 @@ const DocumentView: React.FC = () => {
   };
 
   return (
-    <div className="p-6 bg-white rounded-lg shadow">
-      <h1 className="text-2xl font-bold mb-4">Document View</h1>
+    <div className="p-6 bg-background text-foreground">
+      <h1 className="text-3xl font-bold mb-6">Document View</h1>
       <div className="space-y-6">
         {Object.entries(groupedCards).map(([category, subcategories]) => (
           <RenderCategory key={category} title={category}>
@@ -127,3 +126,4 @@ const DocumentView: React.FC = () => {
 };
 
 export default DocumentView;
+
