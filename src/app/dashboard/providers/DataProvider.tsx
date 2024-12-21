@@ -71,7 +71,7 @@ export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     return acc;
   }, {});
 
-  const lexKey = (card: ICard) => `${card.category}:${card.subCategory}:${card.swimlane}`;
+  // const lexKey = (card: ICard) => `${card.category}:${card.subCategory}:${card.swimlane}`;
 
   // Create a new card
   const createCard = (cardData: Partial<ICard>) => {

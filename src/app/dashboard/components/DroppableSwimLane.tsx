@@ -8,6 +8,7 @@ import {
 import { invariant } from "@/app/utils";
 import { useDataContext } from "@/app/dashboard/providers/DataProvider";
 import { isCardData } from "@/app/dashboard/data";
+import { ICard } from "@/app/dashboard/ICard";
 
 interface DroppableSwimlaneProps {
   title: string;
@@ -38,7 +39,7 @@ const DroppableSwimlane: React.FC<DroppableSwimlaneProps> = ({
       onDrop({ source }) {
         setIsDraggedOver(false)
         if (isCardData(source.data)) {
-          const sourceCard: any = source.data;
+          const sourceCard: ICard = source.data;
           const targetSwimlane = title;
 
           if (sourceCard.swimlane !== targetSwimlane) {
@@ -47,7 +48,7 @@ const DroppableSwimlane: React.FC<DroppableSwimlaneProps> = ({
         }
     },
     });
-  }, [title]);
+  }, [title, updateCard]);
 
   return (
     <div

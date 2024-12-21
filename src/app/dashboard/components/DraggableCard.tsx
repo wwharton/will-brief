@@ -58,11 +58,10 @@ const DraggableCard: React.FC<DraggableCardProps> = ({
           return getCardData(card);
         }, // Provide card data as draggable data
         onDrag: () => setDragging(true),
-        onDrop({ source }) {
+        onDrop() {
           setState(idle);
           setDragging(false);
         },
-        // onDragLeave: () => setDragging(false),
       }),
       dropTargetForElements({
         element,
@@ -112,7 +111,7 @@ const DraggableCard: React.FC<DraggableCardProps> = ({
           setDragging(false);
 
           if (isCardData(source.data)) {
-            const sourceCard: any = source.data;
+            const sourceCard: ICard = source.data;
             const targetSwimlane = swimlane;
 
             if (sourceCard.swimlane !== targetSwimlane) {
