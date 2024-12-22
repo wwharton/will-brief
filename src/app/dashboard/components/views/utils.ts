@@ -1,3 +1,11 @@
+export interface ISlide {
+  category: string;
+  subcategory?: string;
+  swimlane?: string;
+  cards: { id: string; title: string; content: string }[];
+  isTitleCard?: boolean;
+}
+
 export const generateSlides = (cards: Array<{ id: string; title: string; category: string; subCategory: string; swimlane: string; content: string }>) => {
     const groupedSlides: Record<
       string,
@@ -22,13 +30,7 @@ export const generateSlides = (cards: Array<{ id: string; title: string; categor
     });
   
     // Create slides and include title cards for each category
-    const slides: Array<{
-      category: string;
-      subcategory?: string;
-      swimlane?: string;
-      cards: { id: string; title: string; content: string }[];
-      isTitleCard?: boolean;
-    }> = [];
+    const slides: Array<ISlide> = [];
   
     Object.entries(groupedSlides).forEach(([category, subcategories]) => {
       // Insert a title card for the category

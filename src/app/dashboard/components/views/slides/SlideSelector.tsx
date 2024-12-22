@@ -1,9 +1,10 @@
 import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { ISlide } from "@/app/dashboard/components/views/utils";
 
 interface SlideViewProps {
-  slides: any[];
+  slides: ISlide[];
   currentSlide: number;
   onSlideSelect: (index: number) => void;
 }

@@ -4,9 +4,10 @@ import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import TitleSlide from "./TitleSlide";
 import ContentSlide from "./ContentSlide";
+import { ISlide } from "@/app/dashboard/components/views/utils";
 
 interface ActiveSlideProps {
-  currentSlideData: any;
+  currentSlideData: ISlide;
   currentSlide: number;
   totalSlides: number;
   goToPreviousSlide: () => void;

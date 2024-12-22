@@ -55,7 +55,7 @@ const PresentationView: React.FC = () => {
             currentSlide={currentSlide}
             onSlideSelect={setCurrentSlide}
           />
-          <Button onClick={toggleFullScreen} variant="outline" size="sm" className="mt-2">
+          <Button onClick={toggleFullScreen} variant="outline" size="sm" className="mt-2 h-[4%]">
             {isFullScreen ? (
               <>
                 <Minimize2 className="mr-2 h-4 w-4" /> Exit Full Screen
