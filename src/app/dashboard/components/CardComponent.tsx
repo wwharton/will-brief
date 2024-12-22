@@ -42,7 +42,7 @@ const Card: React.FC<CustomCardProps> = ({
   onEdit,
   onDelete,
 }) => {
-  const [cardColor] = useState("bg-secondary text-secondary-foreground")
+  const [cardColor] = useState("bg-blue-200")
 
   return (
     <ShadcnCard className={`w-full ${cardColor} relative border rounded-[--radius]`}>
