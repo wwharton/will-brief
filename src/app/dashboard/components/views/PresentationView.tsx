@@ -1,17 +1,19 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useRef, useCallback } from "react";
 import { useDataContext } from "@/app/dashboard/providers/DataProvider";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Maximize2, Minimize2 } from 'lucide-react';
 import { generateSlides } from "./utils";
-import TitleSlide from "./slides/TitleSlide";
-import ContentSlide from "./slides/ContentSlide";
+import SlideSelector from "./slides/SlideSelector";
+import ActiveSlide from "./slides/ActiveSlide";
 
 const PresentationView: React.FC = () => {
   const { cards } = useDataContext();
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isFullScreen, setIsFullScreen] = useState(false);
+  const presentationRef = useRef<HTMLDivElement>(null);
 
   const slides = useMemo(() => generateSlides(cards), [cards]);
   const totalSlides = slides.length;
@@ -24,6 +26,16 @@ const PresentationView: React.FC = () => {
     setCurrentSlide((prev) => (prev < totalSlides - 1 ? prev + 1 : 0));
   };
 
+  const toggleFullScreen = useCallback(() => {
+    if (!document.fullscreenElement) {
+      presentationRef.current?.requestFullscreen();
+      setIsFullScreen(true);
+    } else {
+      document.exitFullscreen();
+      setIsFullScreen(false);
+    }
+  }, []);
+
   if (!slides.length) {
     return (
       <Card className="h-full flex items-center justify-center">
@@ -35,29 +47,35 @@ const PresentationView: React.FC = () => {
   const currentSlideData = slides[currentSlide];
 
   return (
-    <Card className="light h-full flex flex-col">
-      {currentSlideData.isTitleCard ? (
-        <TitleSlide category={currentSlideData.category} />
-      ) : (
-        <ContentSlide
-          category={currentSlideData.category}
-          subcategory={currentSlideData.subcategory}
-          swimlane={currentSlideData.swimlane}
-          cards={currentSlideData.cards}
+    <div ref={presentationRef} className="h-full flex flex-col">
+      <div className="flex-grow flex space-x-4">
+        <div className="flex flex-col">
+          <SlideSelector
+            slides={slides}
+            currentSlide={currentSlide}
+            onSlideSelect={setCurrentSlide}
+          />
+          <Button onClick={toggleFullScreen} variant="outline" size="sm" className="mt-2">
+            {isFullScreen ? (
+              <>
+                <Minimize2 className="mr-2 h-4 w-4" /> Exit Full Screen
+              </>
+            ) : (
+              <>
+                <Maximize2 className="mr-2 h-4 w-4" /> Full Screen
+              </>
+            )}
+          </Button>
+        </div>
+        <ActiveSlide
+          currentSlideData={currentSlideData}
+          currentSlide={currentSlide}
+          totalSlides={totalSlides}
+          goToPreviousSlide={goToPreviousSlide}
+          goToNextSlide={goToNextSlide}
         />
-      )}
-      <div className="flex justify-between items-center mt-4 px-4">
-        <Button onClick={goToPreviousSlide} variant="outline">
-          <ChevronLeft className="mr-2 h-4 w-4" /> Previous
-        </Button>
-        <span className="text-sm text-muted-foreground">
-          Slide {currentSlide + 1} of {totalSlides}
-        </span>
-        <Button onClick={goToNextSlide} variant="outline">
-          Next <ChevronRight className="ml-2 h-4 w-4" />
-        </Button>
       </div>
-    </Card>
+    </div>
   );
 };
 
