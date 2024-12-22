@@ -5,9 +5,9 @@ import { useNavigationContext } from "@/app/dashboard/providers/NavigationProvid
 import DialogContainer from "@/app/dashboard/containers/DialogContainer";
 import CardPool from "@/app/dashboard/components/CardPool";
 import DocumentView from "@/app/dashboard/components/views/DocumentView";
-import DiagramView from "../components/views/DiagramView";
-import PresentationView from "../components/views/PresentationView";
-import CardsView from "../components/views/CardsView";
+import DiagramView from "@/app/dashboard/components/views/DiagramView";
+import PresentationView from "@/app/dashboard/components/views/PresentationView";
+import CardsView from "@/app/dashboard/components/views/CardsView";
 
 const DefaultView = ({ activeSubcategory }: { activeSubcategory: string | null }) =>
   activeSubcategory ? (
