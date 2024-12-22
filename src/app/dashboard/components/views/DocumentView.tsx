@@ -90,7 +90,7 @@ const DocumentView: React.FC = () => {
   };
 
   return (
-    <div className="p-6 bg-background text-foreground">
+    <div className="light p-6 bg-background text-foreground">
       <h1 className="text-3xl font-bold mb-6">Document View</h1>
       <div className="space-y-6">
         {Object.entries(groupedCards).map(([category, subcategories]) => (

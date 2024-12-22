@@ -110,7 +110,7 @@ const Sidebar: React.FC = () => {
       <div className="flex justify-between items-center text-sm mb-1">
         <div className="flex items-center space-x-2">
           <Presentation className="h-4 w-4" />
-          <h3 className="text-lg font-semibold">Design Presentation</h3>
+          <h3 className="text-lg font-semibold">View</h3>
         </div>
       </div>
 

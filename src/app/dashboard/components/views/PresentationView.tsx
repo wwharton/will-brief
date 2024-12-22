@@ -35,7 +35,7 @@ const PresentationView: React.FC = () => {
   const currentSlideData = slides[currentSlide];
 
   return (
-    <Card className="h-full flex flex-col">
+    <Card className="light h-full flex flex-col">
       {currentSlideData.isTitleCard ? (
         <TitleSlide category={currentSlideData.category} />
       ) : (

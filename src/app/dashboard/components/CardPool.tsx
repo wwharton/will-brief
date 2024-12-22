@@ -21,7 +21,7 @@ const CardPool: React.FC = () => {
   }, {} as Record<string, ICard[]>);
 
   return (
-    <div className="p-4 h-full overflow-x-auto">
+    <div className="light p-4 h-full overflow-x-auto">
       {activeSubcategory && (
         <div className="text-center text-lg font-semibold mb-6">{activeSubcategory}</div>
       )}
