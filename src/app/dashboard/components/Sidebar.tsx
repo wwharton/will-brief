@@ -10,14 +10,14 @@ import {
 import { Button } from "@/components/ui/button";
 import { useDataContext } from "@/app/dashboard/providers/DataProvider";
 import { useNavigationContext } from "@/app/dashboard/providers/NavigationProvider";
-// import { Trash2, Search  } from "lucide-react";
-import { Plus, File, Layers, ChevronDown, Presentation } from 'lucide-react';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+// import { Trash2, Search, ChevronDown  } from "lucide-react";
+import { Plus, File, Layers, Presentation } from 'lucide-react';
+// import {
+//   DropdownMenu,
+//   DropdownMenuContent,
+//   DropdownMenuItem,
+//   DropdownMenuTrigger,
+// } from "@/components/ui/dropdown-menu";
 
 import { useDialogContext } from "@/app/dashboard/providers/DialogProvider";
 
@@ -31,7 +31,7 @@ const Sidebar: React.FC = () => {
       {/* Header */}
       <div className="flex items-center justify-between text-lg font-semibold mb-6">
         <span>Will-Brief Demo</span>
-        <DropdownMenu>
+        {/* <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" size="sm">
               <ChevronDown className="h-4 w-4" />
@@ -42,7 +42,7 @@ const Sidebar: React.FC = () => {
             <DropdownMenuItem>Settings</DropdownMenuItem>
             <DropdownMenuItem>Logout</DropdownMenuItem>
           </DropdownMenuContent>
-        </DropdownMenu>
+        </DropdownMenu> */}
       </div>
 
       {/* Button Row */}
