@@ -77,7 +77,7 @@ const Sidebar: React.FC = () => {
       </div>
 
       {/* Accordion */}
-      <Accordion type="single" collapsible className="w-full overflow-y-auto mb-6">
+      <Accordion type="multiple" className="w-full overflow-y-auto mb-6">
         {categories.map((category, index) => (
           <AccordionItem value={`item-${index}`} key={index}>
             <AccordionTrigger>{category.category}</AccordionTrigger>
@@ -145,4 +145,3 @@ const Sidebar: React.FC = () => {
 };
 
 export default Sidebar;
-

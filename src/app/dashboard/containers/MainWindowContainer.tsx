@@ -8,7 +8,6 @@ import DocumentView from "@/app/dashboard/components/views/DocumentView";
 import DiagramView from "../components/views/DiagramView";
 import PresentationView from "../components/views/PresentationView";
 
-// const PresentationView = () => <div className="text-center text-lg font-bold">Presentation View</div>;
 const DefaultView = ({ activeSubcategory }: { activeSubcategory: string | null }) =>
   activeSubcategory ? (
     <CardPool />

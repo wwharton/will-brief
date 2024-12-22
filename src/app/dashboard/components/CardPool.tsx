@@ -23,7 +23,7 @@ const CardPool: React.FC = () => {
   return (
     <div className="light p-4 h-full overflow-x-auto">
       {activeSubcategory && (
-        <div className="text-center text-lg font-semibold mb-6">{activeSubcategory}</div>
+        <div className="text-center text-xl font-bold mb-6">{activeSubcategory}</div>
       )}
       <div className="h-full flex space-x-6 pb-8" style={{ padding: "20px" }}>
         {Object.entries(swimLaneGroups).map(([swimlane, cards]) => (
