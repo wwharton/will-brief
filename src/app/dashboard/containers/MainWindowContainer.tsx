@@ -7,6 +7,7 @@ import CardPool from "@/app/dashboard/components/CardPool";
 import DocumentView from "@/app/dashboard/components/views/DocumentView";
 import DiagramView from "../components/views/DiagramView";
 import PresentationView from "../components/views/PresentationView";
+import CardsView from "../components/views/CardsView";
 
 const DefaultView = ({ activeSubcategory }: { activeSubcategory: string | null }) =>
   activeSubcategory ? (
@@ -20,6 +21,7 @@ const viewComponents: Record<string, React.FC<{ activeSubcategory?: string | nul
   Presentation: PresentationView,
   Document: DocumentView,
   Diagram: DiagramView,
+  Cards: CardsView,
 };
 
 const MainWindowContainer: React.FC = () => {

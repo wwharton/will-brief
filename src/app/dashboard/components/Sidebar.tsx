@@ -10,7 +10,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { useDataContext } from "@/app/dashboard/providers/DataProvider";
 import { useNavigationContext } from "@/app/dashboard/providers/NavigationProvider";
-import { Plus, File, Trash2, Search, Layers, ChevronDown, Presentation } from 'lucide-react';
+// import { Trash2, Search  } from "lucide-react";
+import { Plus, File, Layers, ChevronDown, Presentation } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -46,15 +47,25 @@ const Sidebar: React.FC = () => {
 
       {/* Button Row */}
       <div className="flex justify-between items-center text-sm space-x-2 mb-6">
-        <Button variant="outline" size="sm" className="flex items-center space-x-1">
+        {/* <Button variant="outline" size="sm" className="flex items-center space-x-1">
           <Search className="h-4 w-4" />
           <span>Jump to</span>
-        </Button>
-        <Button variant="outline" size="sm" className="flex items-center space-x-1">
+        </Button> */}
+        <Button 
+          variant="outline" 
+          size="sm" 
+          className="flex items-center space-x-1"
+          onClick={() => { 
+            console.log("Cards clicked");
+            setActiveView("Cards");
+            setActiveCategory(null);
+            setActiveSubcategory(null);
+          }}
+        >
           <Layers className="h-4 w-4" />
           <span>Cards</span>
         </Button>
-        <DropdownMenu>
+        {/* <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" size="sm" className="flex items-center space-x-1">
               <Trash2 className="h-4 w-4" />
@@ -65,7 +76,7 @@ const Sidebar: React.FC = () => {
             <DropdownMenuItem>Empty Trash</DropdownMenuItem>
             <DropdownMenuItem>Restore All</DropdownMenuItem>
           </DropdownMenuContent>
-        </DropdownMenu>
+        </DropdownMenu> */}
       </div>
 
       {/* Project File */}
