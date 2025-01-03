@@ -24,6 +24,13 @@ const OmniHelp: React.FC<OmniHelpProps> = ({ viewName }) => {
       "Categories, Subcategories, and Lanes are organized AlphaNumerically, consider using leading labels like '1 - ...' to help organize",
       "Cards are organized with an internal rank, drag and drop to reorganize them or change their lanes.",
     ],
+    Document: [
+      "You can double click to edit card content, but titles, categories, etc., must be edited on the card itself",
+    ],
+    Diagram: [
+      "Create relationships between cards by editing a card's 'child of' property to link them together",
+      "The markdown is in 'Mermaid' diagram format, use this to export your diagram to other tools",
+    ],
     default: [
       "Organize with WillBrief!",
     ]

@@ -7,6 +7,7 @@ import MermaidComponent from "./MermaidComponent";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
+import OmniHelp from "@/app/dashboard/components/views/OmniHelp";
 
 const DiagramView: React.FC = () => {
   const { cards } = useDataContext();
@@ -35,6 +36,7 @@ const DiagramView: React.FC = () => {
   }, [cards]);
 
   return (
+    <>
     <Card className="light w-full">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
         <CardTitle className="text-2xl font-bold">Mermaid Diagram</CardTitle>
@@ -63,6 +65,8 @@ const DiagramView: React.FC = () => {
         )}
       </CardContent>
     </Card>
+    <OmniHelp viewName="Diagram" />
+    </>
   );
 };
 

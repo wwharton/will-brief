@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { useDataContext } from "@/app/dashboard/providers/DataProvider";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import OmniHelp from "@/app/dashboard/components/views/OmniHelp";
 
 const RenderCategory: React.FC<{ title: string; children: React.ReactNode }> = ({ title, children }) => (
   <div>
@@ -120,6 +121,7 @@ const DocumentView: React.FC = () => {
           </RenderCategory>
         ))}
       </div>
+      <OmniHelp viewName="Document" />
     </div>
   );
 };

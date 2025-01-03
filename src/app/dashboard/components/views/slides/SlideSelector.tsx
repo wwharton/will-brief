@@ -23,7 +23,7 @@ const SlideSelector: React.FC<SlideViewProps> = ({ slides, currentSlide, onSlide
               onClick={() => onSlideSelect(index)}
             >
               <div className="text-sm font-medium truncate">
-                {slide.isTitleCard ? "Title: " + slide.category : slide.subcategory}
+                {slide.isTitleCard ? slide.category : slide.subcategory}
               </div>
               <div className="text-xs text-muted-foreground truncate">
                 {slide.isTitleCard ? "" : slide.swimlane}
