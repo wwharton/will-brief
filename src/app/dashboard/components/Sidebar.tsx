@@ -53,7 +53,6 @@ const Sidebar: React.FC = () => {
         </Button> */}
         <Button 
           variant="outline" 
-          size="sm" 
           className="flex items-center space-x-1"
           onClick={() => { 
             console.log("Cards clicked");
