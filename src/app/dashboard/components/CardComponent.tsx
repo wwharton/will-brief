@@ -45,7 +45,7 @@ const Card: React.FC<CustomCardProps> = ({
   const [cardColor] = useState("bg-blue-200")
 
   return (
-    <ShadcnCard className={`w-full ${cardColor} relative border rounded-[--radius]`}>
+    <ShadcnCard className={`flex flex-col w-full ${cardColor} relative border rounded-[--radius]`}>
       <CardHeader>
         <div className="flex justify-between items-start">
           <CardTitle>{title}</CardTitle>
@@ -76,7 +76,7 @@ const Card: React.FC<CustomCardProps> = ({
           </DropdownMenu>
         </div>
       </CardHeader>
-      <CardContent>
+      <CardContent className="flex-grow">
         {content && <CardDescription>{content}</CardDescription>}
       </CardContent>
       <CardFooter className="flex justify-end">
@@ -92,4 +92,3 @@ const Card: React.FC<CustomCardProps> = ({
 }
 
 export default Card
-
