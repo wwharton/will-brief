@@ -7,6 +7,7 @@ import DraggableCard from "@/app/dashboard/components/DraggableCard";
 import { useNavigationContext } from "@/app/dashboard/providers/NavigationProvider";
 import { useDialogContext } from "@/app/dashboard/providers/DialogProvider";
 import { ICard } from "@/app/dashboard/ICard";
+import NewSwimlane from "@/app/dashboard/components/NewSwimLane";
 
 const CardPool: React.FC = () => {
   const { cards } = useDataContext();
@@ -44,6 +45,7 @@ const CardPool: React.FC = () => {
             ))}
           </DroppableSwimLane>
         ))}
+        <NewSwimlane activeCategory={activeCategory || ""} activeSubcategory={activeSubcategory || ""} />
       </div>
     </div>
   );
