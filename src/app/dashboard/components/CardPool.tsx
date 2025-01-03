@@ -8,6 +8,8 @@ import { useNavigationContext } from "@/app/dashboard/providers/NavigationProvid
 import { useDialogContext } from "@/app/dashboard/providers/DialogProvider";
 import { ICard } from "@/app/dashboard/ICard";
 import NewSwimlane from "@/app/dashboard/components/NewSwimLane";
+import OmniHelp from "@/app/dashboard/components/views/OmniHelp";
+
 
 const CardPool: React.FC = () => {
   const { cards } = useDataContext();
@@ -47,6 +49,7 @@ const CardPool: React.FC = () => {
         ))}
         <NewSwimlane activeCategory={activeCategory || ""} activeSubcategory={activeSubcategory || ""} />
       </div>
+      <OmniHelp viewName="CardPool" />
     </div>
   );
 };
