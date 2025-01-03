@@ -23,8 +23,8 @@ const NewSwimlane: React.FC<NewSwimlaneProps> = ({ activeCategory, activeSubcate
         category: activeCategory,
         subCategory: activeSubcategory,
         swimlane: newLaneName,
-        title: "New Lane",
-        content: "",
+        title: "Placeholder",
+        content: "Update Me!",
         type: "bullet",
       });
       setNewLaneName("");
@@ -34,10 +34,7 @@ const NewSwimlane: React.FC<NewSwimlaneProps> = ({ activeCategory, activeSubcate
 
   return (
     <Card className="w-[12.5vw] min-w-[250px] h-full flex flex-col rounded-none">
-      <CardHeader className="p-4 flex-shrink-0">
-        <CardTitle className="text-lg font-bold">New Lane</CardTitle>
-      </CardHeader>
-      <CardContent className="flex-1 overflow-y-auto p-4 flex flex-col">
+      <CardHeader className="flex-1 overflow-y-auto p-4 flex flex-col">
         {isCreating ? (
           <div className="space-y-4 w-full">
             <Input
@@ -51,7 +48,7 @@ const NewSwimlane: React.FC<NewSwimlaneProps> = ({ activeCategory, activeSubcate
               className="w-full mt-4 flex items-center justify-center rounded-md hover:bg-muted"
               onClick={handleCreateNewLane}
             >
-              Create Lane
+              <CardTitle>Create Lane</CardTitle>
             </Button>
           </div>
         ) : (
@@ -66,7 +63,7 @@ const NewSwimlane: React.FC<NewSwimlaneProps> = ({ activeCategory, activeSubcate
             </Button>
           </div>
         )}
-      </CardContent>
+      </CardHeader>
     </Card>
   );
 };
