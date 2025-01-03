@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import {
   Accordion,
   AccordionContent,
@@ -10,52 +10,44 @@ import {
 import { Button } from "@/components/ui/button";
 import { useDataContext } from "@/app/dashboard/providers/DataProvider";
 import { useNavigationContext } from "@/app/dashboard/providers/NavigationProvider";
-// import { Trash2, Search, ChevronDown  } from "lucide-react";
-import { Plus, File, Layers, Presentation } from 'lucide-react';
-// import {
-//   DropdownMenu,
-//   DropdownMenuContent,
-//   DropdownMenuItem,
-//   DropdownMenuTrigger,
-// } from "@/components/ui/dropdown-menu";
-
+import { Plus, File, Layers, Presentation, ChevronDown, ChevronUp } from 'lucide-react';
 import { useDialogContext } from "@/app/dashboard/providers/DialogProvider";
 
 const Sidebar: React.FC = () => {
-  const { categories } = useDataContext();
+  const { categories, exportCards, importCards } = useDataContext();
   const { activeSubcategory, setActiveCategory, setActiveSubcategory, setActiveView } = useNavigationContext();
   const { openDialog } = useDialogContext();
+  const [importJson, setImportJson] = useState<string>("");
+  const [isImportExportOpen, setIsImportExportOpen] = useState<boolean>(false);
+
+  const handleExport = () => {
+    const json = exportCards();
+    const blob = new Blob([json], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "cards.txt";
+    a.click();
+  };
+
+  const handleImport = () => {
+    importCards(importJson);
+    setImportJson("");
+  };
 
   return (
     <div className="h-full p-4 bg-background text-foreground flex flex-col border-r border-border">
       {/* Header */}
       <div className="flex items-center justify-between text-lg font-semibold mb-6">
         <span>Will-Brief Demo</span>
-        {/* <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="sm">
-              <ChevronDown className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent>
-            <DropdownMenuItem>Profile</DropdownMenuItem>
-            <DropdownMenuItem>Settings</DropdownMenuItem>
-            <DropdownMenuItem>Logout</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu> */}
       </div>
 
       {/* Button Row */}
       <div className="flex justify-between items-center text-sm space-x-2 mb-6">
-        {/* <Button variant="outline" size="sm" className="flex items-center space-x-1">
-          <Search className="h-4 w-4" />
-          <span>Jump to</span>
-        </Button> */}
         <Button 
           variant="outline" 
           className="flex items-center space-x-1"
           onClick={() => { 
-            console.log("Cards clicked");
             setActiveView("Cards");
             setActiveCategory(null);
             setActiveSubcategory(null);
@@ -64,18 +56,6 @@ const Sidebar: React.FC = () => {
           <Layers className="h-4 w-4" />
           <span>Cards</span>
         </Button>
-        {/* <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" size="sm" className="flex items-center space-x-1">
-              <Trash2 className="h-4 w-4" />
-              <ChevronDown className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent>
-            <DropdownMenuItem>Empty Trash</DropdownMenuItem>
-            <DropdownMenuItem>Restore All</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu> */}
       </div>
 
       {/* Project File */}
@@ -141,7 +121,7 @@ const Sidebar: React.FC = () => {
       </ul>
 
       {/* New Card Button */}
-      <div className="mt-auto">
+      <div className="mt-auto space-y-2">
         <Button
           onClick={() => {openDialog("new")}}
           className="w-full"
@@ -149,6 +129,39 @@ const Sidebar: React.FC = () => {
           <Plus className="mr-2 h-5 w-5" />
           New Card
         </Button>
+
+        {/* Import / Export Section */}
+        <div>
+          <div
+            className="flex items-center justify-between cursor-pointer"
+            onClick={() => setIsImportExportOpen(!isImportExportOpen)}
+          >
+            <span>Import / Export Cards</span>
+            {isImportExportOpen ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+          </div>
+          {isImportExportOpen && (
+            <div className="mt-2 space-y-2">
+              <Button
+                onClick={handleExport}
+                className="w-full"
+              >
+                Export Cards
+              </Button>
+              <textarea
+                value={importJson}
+                onChange={(e) => setImportJson(e.target.value)}
+                placeholder="Paste JSON here to import cards"
+                className="w-full h-20 p-2 mb-2 border rounded"
+              />
+              <Button
+                onClick={handleImport}
+                className="w-full"
+              >
+                Import Cards
+              </Button>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

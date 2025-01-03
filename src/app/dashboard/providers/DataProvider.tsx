@@ -18,7 +18,9 @@ interface DataContextType {
   createCard: (cardData: Partial<ICard>) => void;
   updateCard: (id: string, updatedCard: Partial<ICard>) => void;
   deleteCard: (id: string) => void;
-  reRankCard: (sourceCardId: string, targetCardId: string, edge: "top" | "bottom") => void; // New method
+  reRankCard: (sourceCardId: string, targetCardId: string, edge: "top" | "bottom") => void;
+  exportCards: () => string;
+  importCards: (jsonString: string) => void;
 }
 
 const DataContext = createContext<DataContextType | undefined>(undefined);
@@ -72,7 +74,24 @@ export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     return acc;
   }, {});
 
-  // const lexKey = (card: ICard) => `${card.category}:${card.subCategory}:${card.swimlane}`;
+  // Utility functions for exporting and importing cards
+  const exportCardsToJson = (cards: ICard[]): string => {
+    return JSON.stringify(cards, null, 2);
+  };
+
+  const importCardsFromJson = (jsonString: string): ICard[] => {
+    try {
+      const parsedCards = JSON.parse(jsonString);
+      if (Array.isArray(parsedCards)) {
+        return parsedCards;
+      } else {
+        throw new Error("Invalid JSON format");
+      }
+    } catch (error) {
+      console.error("Failed to parse JSON:", error);
+      return [];
+    }
+  };
 
   const createCard = (cardData: Partial<ICard>) => {
     const newCard: ICard = {
@@ -116,14 +135,7 @@ export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     });
   }
 
-  /**
-   * Re-rank a card based on its drop position relative to a target card.
-   * @param sourceCardId - ID of the card being moved.
-   * @param targetCardId - ID of the card on which the source card is dropped.
-   * @param edge - 'top' or 'bottom' indicating drop position relative to target.
-   */
   const reRankCard = (sourceCardId: string, targetCardId: string, edge: "top" | "bottom") => {
-    // console.log("Re-ranking card", sourceCardId, "relative to", targetCardId, "at", edge);
     setCards((prevCards) => {
       const sourceCard = prevCards.find(card => card.id === sourceCardId);
       const targetCard = prevCards.find(card => card.id === targetCardId);
@@ -133,14 +145,12 @@ export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         return prevCards;
       }
 
-      // Ensure both cards are in the same swimlane
       const targetSwimlane = targetCard.swimlane;
 
       const swimlaneCards = prevCards
         .filter(card => card.swimlane === targetSwimlane && card.id !== sourceCardId)
         .sort((a, b) => a.rank - b.rank);
 
-      // Find the position of the target card
       const targetIndex = swimlaneCards.findIndex(card => card.id === targetCardId);
 
       if (targetIndex === -1) {
@@ -152,7 +162,6 @@ export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
       if (edge === "top") {
         if (targetIndex === 0) {
-          // No card above, set rank to target rank - 100
           newRank = targetCard.rank - 100;
         } else {
           const aboveCard = swimlaneCards[targetIndex - 1];
@@ -160,7 +169,6 @@ export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         }
       } else if (edge === "bottom") {
         if (targetIndex === swimlaneCards.length - 1) {
-          // No card below, set rank to target rank + 100
           newRank = targetCard.rank + 100;
         } else {
           const belowCard = swimlaneCards[targetIndex + 1];
@@ -170,18 +178,24 @@ export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         return prevCards;
       }
 
-      // Optional: Handle cases where newRank is too close to adjacent ranks
-      // This could involve reassigning ranks to maintain gaps
       const updatedCards = prevCards.map(card => 
         card.id === sourceCardId ? { ...card, swimlane: targetSwimlane, rank: newRank } : card
       );
-      // then sort cards
       return sortCards(updatedCards);
     });
   };
 
+  const exportCards = () => {
+    return exportCardsToJson(cards);
+  };
+
+  const importCards = (jsonString: string) => {
+    const importedCards = importCardsFromJson(jsonString);
+    setCards(() => sortCards(importedCards));
+  };
+
   return (
-    <DataContext.Provider value={{ categories, subcategories, swimlanes, cards, groupedCards, createCard, updateCard, deleteCard, reRankCard }}>
+    <DataContext.Provider value={{ categories, subcategories, swimlanes, cards, groupedCards, createCard, updateCard, deleteCard, reRankCard, exportCards, importCards }}>
       {children}
     </DataContext.Provider>
   );
