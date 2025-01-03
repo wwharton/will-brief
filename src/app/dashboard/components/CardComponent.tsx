@@ -27,15 +27,6 @@ interface CustomCardProps {
   onDelete?: () => void
 }
 
-// const colorOptions = [
-//   { name: "Default", class: "bg-card text-card-foreground" },
-//   { name: "Primary", class: "bg-primary text-primary-foreground" },
-//   { name: "Secondary", class: "bg-secondary text-secondary-foreground" },
-//   { name: "Accent", class: "bg-accent text-accent-foreground" },
-//   { name: "Muted", class: "bg-muted text-muted-foreground" },
-//   { name: "Destructive", class: "bg-destructive text-destructive-foreground" },
-// ]
-
 const Card: React.FC<CustomCardProps> = ({
   title,
   content,
@@ -51,23 +42,15 @@ const Card: React.FC<CustomCardProps> = ({
           <CardTitle>{title}</CardTitle>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="icon" className="h-8 w-8 absolute top-2 right-2">
+              <Button variant="ghost" size="icon" className="h-8 w-8 absolute top-2 right-2" aria-label="More options" data-testid="more-options-button">
                 <MoreVertical className="h-4 w-4" />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>Card Options</DropdownMenuLabel>
-              {/* <DropdownMenuSeparator /> */}
-              {/* <DropdownMenuLabel>Change Color</DropdownMenuLabel> */}
-              {/* {colorOptions.map((color) => (
-                <DropdownMenuItem key={color.class} onClick={() => setCardColor(color.class)}>
-                  <div className={`w-4 h-4 rounded-full ${color.class} mr-2 border`} />
-                  {color.name}
-                </DropdownMenuItem>
-              ))} */}
               <DropdownMenuSeparator />
               {onDelete && (
-                <DropdownMenuItem onClick={onDelete}>
+                <DropdownMenuItem onClick={onDelete} data-testid="delete-option">
                   <Trash2 className="h-4 w-4 mr-2" />
                   Delete
                 </DropdownMenuItem>
@@ -81,7 +64,7 @@ const Card: React.FC<CustomCardProps> = ({
       </CardContent>
       <CardFooter className="flex justify-end">
         {onEdit && (
-          <Button variant="outline" size="sm" onClick={onEdit}>
+          <Button variant="outline" size="sm" onClick={onEdit} data-testid="edit-button">
             <Edit className="h-4 w-4 mr-2" />
             Edit
           </Button>
