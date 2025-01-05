@@ -1,10 +1,6 @@
-"use client";
+import DashboardClient from "./DashboardClient";
 
-import React from "react";
-import MainWindowContainer from "@/app/dashboard/containers/MainWindowContainer";
+export default function DashboardPage() {
+  return <DashboardClient />;
+}
 
-const DashboardPage: React.FC = () => {
-  return <MainWindowContainer />;
-};
-
-export default DashboardPage;
