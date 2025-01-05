@@ -3,13 +3,13 @@
 import React, { useMemo, useState } from "react";
 import { Textarea } from "@/components/ui/textarea";
 import { useDataContext } from "@/app/dashboard/providers/DataProvider";
-import MermaidComponent from "./MermaidComponent";
+import MermaidComponent from "@/app/dashboard/diagram/MermaidComponent";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
-import OmniHelp from "@/app/dashboard/components/views/OmniHelp";
+import OmniHelp from "@/app/dashboard/components/OmniHelp";
 
-const DiagramView: React.FC = () => {
+const Diagram: React.FC = () => {
   const { cards } = useDataContext();
   const [showDiagram, setShowDiagram] = useState(true);
 
@@ -70,5 +70,5 @@ const DiagramView: React.FC = () => {
   );
 };
 
-export default DiagramView;
+export default Diagram;
 

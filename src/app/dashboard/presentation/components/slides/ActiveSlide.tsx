@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import TitleSlide from "./TitleSlide";
 import ContentSlide from "./ContentSlide";
-import { ISlide } from "@/app/dashboard/components/views/utils";
+import { ISlide } from "@/app/dashboard/presentation/utils";
 
 interface ActiveSlideProps {
   currentSlideData: ISlide;

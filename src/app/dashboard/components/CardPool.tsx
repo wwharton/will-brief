@@ -8,7 +8,7 @@ import { useNavigationContext } from "@/app/dashboard/providers/NavigationProvid
 import { useDialogContext } from "@/app/dashboard/providers/DialogProvider";
 import { ICard } from "@/app/dashboard/ICard";
 import NewSwimLane from "@/app/dashboard/components/NewSwimLane";
-import OmniHelp from "@/app/dashboard/components/views/OmniHelp";
+import OmniHelp from "@/app/dashboard/components/OmniHelp";
 
 
 const CardPool: React.FC = () => {

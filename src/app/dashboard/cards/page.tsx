@@ -4,9 +4,9 @@ import React from "react";
 import { useDataContext } from "@/app/dashboard/providers/DataProvider";
 import Card from "@/app/dashboard/components/CardComponent";
 import { useDialogContext } from "@/app/dashboard/providers/DialogProvider";
-import OmniHelp from "@/app/dashboard/components/views/OmniHelp";
+import OmniHelp from "@/app/dashboard/components/OmniHelp";
 
-const CardsView: React.FC = () => {
+const Cards: React.FC = () => {
   const { cards } = useDataContext();
   const { openDialog } = useDialogContext();
 
@@ -24,9 +24,9 @@ const CardsView: React.FC = () => {
           />
         ))}
       </div>
-      <OmniHelp viewName="CardsView" />
+      <OmniHelp viewName="Cards" />
     </div>
   );
 };
 
-export default CardsView;
+export default Cards;

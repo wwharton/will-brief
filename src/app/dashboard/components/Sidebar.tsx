@@ -13,9 +13,12 @@ import { useNavigationContext } from "@/app/dashboard/providers/NavigationProvid
 import { Plus, File, Layers, Presentation, ChevronDown, ChevronUp } from 'lucide-react';
 import { useDialogContext } from "@/app/dashboard/providers/DialogProvider";
 
+import Link from "next/link"; // Import Link from Next.js
+
+
 const Sidebar: React.FC = () => {
   const { categories, exportCards, importCards } = useDataContext();
-  const { activeSubcategory, setActiveCategory, setActiveSubcategory, setActiveView } = useNavigationContext();
+  const { activeSubcategory, setActiveCategory, setActiveSubcategory } = useNavigationContext();
   const { openDialog } = useDialogContext();
   const [importJson, setImportJson] = useState<string>("");
   const [isImportExportOpen, setIsImportExportOpen] = useState<boolean>(false);
@@ -44,18 +47,20 @@ const Sidebar: React.FC = () => {
 
       {/* Button Row */}
       <div className="flex justify-between items-center text-sm space-x-2 mb-6">
-        <Button 
-          variant="outline" 
-          className="flex items-center space-x-1"
-          onClick={() => { 
-            setActiveView("Cards");
-            setActiveCategory(null);
-            setActiveSubcategory(null);
-          }}
-        >
-          <Layers className="h-4 w-4" />
-          <span>Cards</span>
-        </Button>
+        <Link href="/dashboard/cards" passHref>
+          <Button 
+            // as="a" // Ensure Button acts as an anchor
+            variant="outline" 
+            className="flex items-center space-x-1"
+            onClick={() => { 
+              setActiveCategory(null);
+              setActiveSubcategory(null);
+            }}
+          >
+            <Layers className="h-4 w-4" />
+            <span>Cards</span>
+          </Button>
+        </Link>
       </div>
 
       {/* Project File */}
@@ -72,23 +77,25 @@ const Sidebar: React.FC = () => {
           <AccordionItem value={`item-${index}`} key={index}>
             <AccordionTrigger>{category.category}</AccordionTrigger>
             <AccordionContent>
+
               <ul className="py-2 space-y-1">
                 {category.items.map((item) => (
-                  <li
-                    key={item}
-                    className={`rounded-md p-2 cursor-pointer ${
-                      activeSubcategory === item
-                        ? "bg-accent text-accent-foreground"
-                        : "hover:bg-accent hover:text-accent-foreground"
-                    }`}
-                    onClick={() => {
-                      setActiveCategory(category.category);
-                      setActiveSubcategory(item);
-                      setActiveView(null);
-                    }}
-                  >
-                    {item}
-                  </li>
+                  <Link key={item} href={`/dashboard`} passHref>
+                    <li
+                      key={item}
+                      className={`rounded-md p-2 cursor-pointer ${
+                        activeSubcategory === item
+                          ? "bg-accent text-accent-foreground"
+                          : "hover:bg-accent hover:text-accent-foreground"
+                      }`}
+                      onClick={() => {
+                        setActiveCategory(category.category);
+                        setActiveSubcategory(item);
+                      }}
+                    >
+                      {item}
+                    </li>
+                  </Link>
                 ))}
               </ul>
             </AccordionContent>
@@ -106,17 +113,17 @@ const Sidebar: React.FC = () => {
 
       <ul className="space-y-1">
         {["Presentation", "Document", "Diagram"].map((item) => (
-          <li
-            key={item}
-            className="py-2 px-4 hover:bg-accent hover:text-accent-foreground rounded-md cursor-pointer"
-            onClick={() => {
-              setActiveView(item);
-              setActiveCategory(null);
-              setActiveSubcategory(null);
-            }}
-          >
-            {item}
-          </li>
+          <Link key={item} href={`/dashboard/${item.toLowerCase()}`} passHref>
+            <li
+              className="py-2 px-4 hover:bg-accent hover:text-accent-foreground rounded-md cursor-pointer"
+              onClick={() => {
+                setActiveCategory(null);
+                setActiveSubcategory(null);
+              }}
+            >
+              {item}
+            </li>
+          </Link>
         ))}
       </ul>
 

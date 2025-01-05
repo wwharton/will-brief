@@ -6,10 +6,10 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Maximize2, Minimize2 } from 'lucide-react';
 import { generateSlides } from "./utils";
-import SlideSelector from "./slides/SlideSelector";
-import ActiveSlide from "./slides/ActiveSlide";
+import SlideSelector from "./components/slides/SlideSelector";
+import ActiveSlide from "./components/slides/ActiveSlide";
 
-const PresentationView: React.FC = () => {
+const Presentation: React.FC = () => {
   const { cards } = useDataContext();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isFullScreen, setIsFullScreen] = useState(false);
@@ -79,4 +79,4 @@ const PresentationView: React.FC = () => {
   );
 };
 
-export default PresentationView;
+export default Presentation;

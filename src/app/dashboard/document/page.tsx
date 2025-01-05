@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useDataContext } from "@/app/dashboard/providers/DataProvider";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import OmniHelp from "@/app/dashboard/components/views/OmniHelp";
+import OmniHelp from "@/app/dashboard/components/OmniHelp";
 
 const RenderCategory: React.FC<{ title: string; children: React.ReactNode }> = ({ title, children }) => (
   <div>
@@ -67,7 +67,7 @@ const RenderTitleContent: React.FC<{
   </li>
 );
 
-const DocumentView: React.FC = () => {
+const Document: React.FC = () => {
   const { groupedCards, updateCard } = useDataContext();
   const [editingCardId, setEditingCardId] = useState<string | null>(null);
   const [editedContent, setEditedContent] = useState<string>("");
@@ -126,5 +126,5 @@ const DocumentView: React.FC = () => {
   );
 };
 
-export default DocumentView;
+export default Document;
 

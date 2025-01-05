@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { ISlide } from "@/app/dashboard/components/views/utils";
+import { ISlide } from "@/app/dashboard/presentation/utils";
 
 interface SlideViewProps {
   slides: ISlide[];
