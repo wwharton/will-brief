@@ -7,12 +7,12 @@ import { Input } from "@/components/ui/input";
 import { Plus } from 'lucide-react';
 import { useDataContext } from "@/app/dashboard/providers/DataProvider";
 
-interface NewSwimlaneProps {
+interface NewSwimLaneProps {
   activeCategory: string;
   activeSubcategory: string;
 }
 
-const NewSwimlane: React.FC<NewSwimlaneProps> = ({ activeCategory, activeSubcategory }) => {
+const NewSwimLane: React.FC<NewSwimLaneProps> = ({ activeCategory, activeSubcategory }) => {
   const { createCard } = useDataContext();
   const [isCreating, setIsCreating] = useState(false);
   const [newLaneName, setNewLaneName] = useState("");
@@ -68,4 +68,4 @@ const NewSwimlane: React.FC<NewSwimlaneProps> = ({ activeCategory, activeSubcate
   );
 };
 
-export default NewSwimlane;
+export default NewSwimLane;
