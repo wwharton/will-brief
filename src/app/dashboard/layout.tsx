@@ -1,12 +1,33 @@
-import React from "react";
-import DashboardClientLayout from "./DashboardClientLayout";
+"use client";
 
-// must update the casing of layout, somehow desynced in github from lower (local) upper (github)
-export default function DashboardLayout({
-  children,
-}: {
+import React from "react";
+import Sidebar from "@/app/dashboard/components/Sidebar";
+import { DataProvider } from "@/app/dashboard/providers/DataProvider";
+import { NavigationProvider } from "@/app/dashboard/providers/NavigationProvider";
+import { DialogProvider } from "@/app/dashboard/providers/DialogProvider";
+
+interface LayoutProps {
   children: React.ReactNode;
-}) {
-  return <DashboardClientLayout>{children}</DashboardClientLayout>;
 }
+
+const Layout: React.FC<LayoutProps> = ({ children }) => {
+  return (
+    <DataProvider>
+      <NavigationProvider>
+        <DialogProvider>
+          <div className="flex h-screen overflow-hidden">
+            <div className="flex-shrink-0 max-w-xs w-full">
+              <Sidebar />
+            </div>
+            <div className="flex-grow overflow-hidden p-4 bg-slate-500">
+              {children}
+            </div>
+          </div>
+        </DialogProvider>
+      </NavigationProvider>
+    </DataProvider>
+  );
+};
+
+export default Layout;
 
