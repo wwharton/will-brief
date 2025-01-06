@@ -15,23 +15,62 @@ const Diagram: React.FC = () => {
 
   const mermaidMarkdown = useMemo(() => {
     let mermaidString = "graph TD\n";
-
-    cards.forEach((card) => {
-      const { id, parent, title } = card;
-
+  
+    // Create a set to keep track of added virtual elements
+    const addedElements = new Set();
+  
+    // Sort cards by Category, Subcategory, Swimlane, and rank
+    const sortedCards = [...cards].sort((a, b) => {
+      if (a.category !== b.category) return a.category.localeCompare(b.category);
+      if (a.subCategory !== b.subCategory) return a.subCategory.localeCompare(b.subCategory);
+      if (a.swimlane !== b.swimlane) return a.swimlane.localeCompare(b.swimlane);
+      return a.rank - b.rank;
+    });
+  
+    sortedCards.forEach((card) => {
+      const { id, parent, title, category, subCategory, swimlane } = card;
+  
       const escapedTitle = title.replace(/</g, "&lt;");
       const truncatedTitle =
         escapedTitle.length > 30
           ? `${escapedTitle.slice(0, 30)}...`
           : escapedTitle;
-
-      mermaidString += `    ${id}["${truncatedTitle}"]\n`;
-
+  
+      // Create valid node IDs by replacing spaces and special characters
+      const categoryId = category.replace(/\s+/g, '_');
+      const subCategoryId = subCategory.replace(/\s+/g, '_');
+      const swimlaneId = swimlane.replace(/\s+/g, '_');
+      const cardId = id.replace(/\s+/g, '_');
+  
+      // Add virtual elements for Category, Subcategory, and Swimlane
+      if (!addedElements.has(categoryId)) {
+        mermaidString += `    ${categoryId}(["${category}"])\n`;
+        addedElements.add(categoryId);
+      }
+      if (!addedElements.has(subCategoryId)) {
+        mermaidString += `    ${subCategoryId}(["${subCategory}"])\n`;
+        mermaidString += `    ${categoryId} --> ${subCategoryId}\n`;
+        addedElements.add(subCategoryId);
+      }
+      if (!addedElements.has(swimlaneId)) {
+        mermaidString += `    ${swimlaneId}(["${swimlane}"])\n`;
+        mermaidString += `    ${subCategoryId} --> ${swimlaneId}\n`;
+        addedElements.add(swimlaneId);
+      }
+  
+      // Add the card itself
+      mermaidString += `    ${cardId}["${truncatedTitle}"]\n`;
+  
+      // Link the card to its swimlane
+      mermaidString += `    ${swimlaneId} --> ${cardId}\n`;
+  
+      // If a parent is specified, override the hierarchy link
       if (parent && parent !== "No Parent" && parent.trim() !== "") {
-        mermaidString += `    ${parent} --> ${id}\n`;
+        const parentId = parent.replace(/\s+/g, '_');
+        mermaidString += `    ${parentId} --> ${cardId}\n`;
       }
     });
-
+  
     return mermaidString;
   }, [cards]);
 

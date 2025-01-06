@@ -28,8 +28,9 @@ const OmniHelp: React.FC<OmniHelpProps> = ({ viewName }) => {
       "You can double click to edit card content, but titles, categories, etc., must be edited on the card itself",
     ],
     Diagram: [
-      "Create relationships between cards by editing a card's 'child of' property to link them together",
-      "The markdown is in 'Mermaid' diagram format, use this to export your diagram to other tools",
+      "Override relationships between cards by editing a card's 'child of' property to link them together",
+      "The markdown is in 'Mermaid' chart format, use this to export your diagram to other tools",
+      "Cards are represented with angled edges, categories, subcategories, and lanes are rounded"
     ],
     default: [
       "Organize with WillBrief!",
