@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useMemo } from "react";
 import { useDataContext } from "@/app/dashboard/providers/DataProvider";
-import Card from "@/app/dashboard/components/CardComponent";
+import Card from "@/app/dashboard/components/cards/CardComponent";
 import { useDialogContext } from "@/app/dashboard/providers/DialogProvider";
 import { useSearch } from "@/app/dashboard/providers/SearchProvider";
 import OmniHelp from "@/app/dashboard/components/OmniHelp";

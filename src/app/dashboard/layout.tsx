@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Sidebar from "@/app/dashboard/components/Sidebar";
+import Sidebar from "@/app/dashboard/components/sidebar/Sidebar";
 import { DataProvider } from "@/app/dashboard/providers/DataProvider";
 import { NavigationProvider } from "@/app/dashboard/providers/NavigationProvider";
 import { DialogProvider } from "@/app/dashboard/providers/DialogProvider";

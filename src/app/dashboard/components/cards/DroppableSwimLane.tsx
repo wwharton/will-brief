@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef, useEffect, useState } from "react";
-import Swimlane from "@/app/dashboard/components/Swimlane";
+import Swimlane from "@/app/dashboard/components/cards/Swimlane";
 import {
   dropTargetForElements,
 } from "@atlaskit/pragmatic-drag-and-drop/element/adapter";

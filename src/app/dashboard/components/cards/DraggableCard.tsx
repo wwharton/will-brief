@@ -3,7 +3,7 @@
 "use client";
 
 import React, { useRef, useEffect, useState } from "react";
-import Card from "@/app/dashboard/components/CardComponent";
+import Card from "@/app/dashboard/components/cards/CardComponent";
 import {
   draggable,
   dropTargetForElements,

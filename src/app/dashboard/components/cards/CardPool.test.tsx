@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 import { useDataContext } from "@/app/dashboard/providers/DataProvider";
 import { useNavigationContext } from "@/app/dashboard/providers/NavigationProvider";
 import { useDialogContext } from "@/app/dashboard/providers/DialogProvider";
-import CardPool from "@/app/dashboard/components/CardPool";
+import CardPool from "@/app/dashboard/components/cards/CardPool";
 import { createNavigationContext } from "@/app/dashboard/providers/__mocks__/NavigationProviderMocks";
 import { createDataContext } from "@/app/dashboard/providers/__mocks__/DataProviderMocks";
 

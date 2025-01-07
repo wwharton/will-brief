@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
-import Sidebar from "@/app/dashboard/components/Sidebar";
+import Sidebar from "@/app/dashboard/components/sidebar/Sidebar";
 import { useDataContext } from "@/app/dashboard/providers/DataProvider";
 import { useDialogContext } from "@/app/dashboard/providers/DialogProvider";
 import { createNavigationContext } from "@/app/dashboard/providers/__mocks__/NavigationProviderMocks";
