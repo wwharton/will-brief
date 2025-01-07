@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { File } from 'lucide-react';
-import { useNavigationContext } from "@/app/dashboard/providers/NavigationProvider";
+import { useNavigationContext } from "@/app/dashboard/components/providers/NavigationProvider";
 import {
   Accordion,
   AccordionContent,

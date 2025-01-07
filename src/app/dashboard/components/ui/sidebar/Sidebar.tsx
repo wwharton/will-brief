@@ -1,13 +1,13 @@
 "use client";
 
 import React, { useState } from "react";
-import SidebarHeader from "@/app/dashboard/components/sidebar/SidebarHeader";
-import SidebarNavigation from "@/app/dashboard/components/sidebar/SidebarNavigation";
-import SidebarDesignFiles from "@/app/dashboard/components/sidebar/SidebarDesignFiles";
-import SidebarViews from "@/app/dashboard/components/sidebar/SidebarViews";
-import SidebarActions from "@/app/dashboard/components/sidebar/SidebarActions";
-import { useDataContext } from "@/app/dashboard/providers/DataProvider";
-import { useNavigationContext } from "@/app/dashboard/providers/NavigationProvider";
+import SidebarHeader from "@/app/dashboard/components/ui/sidebar/SidebarHeader";
+import SidebarNavigation from "@/app/dashboard/components/ui/sidebar/SidebarNavigation";
+import SidebarDesignFiles from "@/app/dashboard/components/ui/sidebar/SidebarDesignFiles";
+import SidebarViews from "@/app/dashboard/components/ui/sidebar/SidebarViews";
+import SidebarActions from "@/app/dashboard/components/ui/sidebar/SidebarActions";
+import { useDataContext } from "@/app/dashboard/components/providers/DataProvider";
+import { useNavigationContext } from "@/app/dashboard/components/providers/NavigationProvider";
 
 const Sidebar: React.FC = () => {
   const { categories, exportCards, importCards } = useDataContext();

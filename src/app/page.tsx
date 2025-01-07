@@ -1,11 +1,11 @@
 'use client'
 
 import React from 'react'
-import Hero from '@/app/components/Hero'
-import Features from '@/app/components/Features'
-import HowItWorks from '@/app/components/HowItWorks'
-import CTA from '@/app/components/CTA'
-import Testimonials from '@/app/components/Testimonials'
+import Hero from '@/app/components/ui/Hero'
+import Features from '@/app/components/ui/Features'
+import HowItWorks from '@/app/components/ui/HowItWorks'
+import CTA from '@/app/components/ui/CTA'
+import Testimonials from '@/app/components/ui/Testimonials'
 
 const HomePage: React.FC = () => {
   return (

@@ -1,4 +1,4 @@
-import { createInvertedIndex, searchCards, normalizeText } from '@/app/dashboard/providers/searchUtils';
+import { createInvertedIndex, searchCards, normalizeText } from '@/app/dashboard/components/providers/searchUtils';
 import { ICard } from '@/app/dashboard/ICard';
 
 const mockCards: ICard[] = [

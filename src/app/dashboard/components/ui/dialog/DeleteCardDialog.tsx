@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { useDataContext } from "@/app/dashboard/providers/DataProvider";
+import { useDataContext } from "@/app/dashboard/components/providers/DataProvider";
 import { ICard } from "@/app/dashboard/ICard";
 
 interface DeleteCardDialogProps {

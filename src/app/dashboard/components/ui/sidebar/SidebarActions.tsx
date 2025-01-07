@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Plus, ChevronDown, ChevronUp } from 'lucide-react';
-import { useDialogContext } from "@/app/dashboard/providers/DialogProvider";
+import { useDialogContext } from "@/app/dashboard/components/providers/DialogProvider";
 
 interface SidebarActionsProps {
   isImportExportOpen: boolean;

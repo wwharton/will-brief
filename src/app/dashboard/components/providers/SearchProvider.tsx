@@ -1,8 +1,8 @@
 "use client";
 
 import React, { createContext, useContext, useMemo, useState, useCallback } from 'react';
-import { useDataContext } from '@/app/dashboard/providers/DataProvider';
-import { InvertedIndex, createInvertedIndex, searchCards as searchCardsUtil } from '@/app/dashboard/providers/searchUtils';
+import { useDataContext } from '@/app/dashboard/components/providers/DataProvider';
+import { InvertedIndex, createInvertedIndex, searchCards as searchCardsUtil } from '@/app/dashboard/components/providers/searchUtils';
 
 interface SearchContextType {
   searchCards: (query: string) => string[];

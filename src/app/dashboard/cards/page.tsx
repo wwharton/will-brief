@@ -1,11 +1,11 @@
 "use client";
 
 import React, { useState, useEffect, useMemo } from "react";
-import { useDataContext } from "@/app/dashboard/providers/DataProvider";
-import Card from "@/app/dashboard/components/cards/CardComponent";
-import { useDialogContext } from "@/app/dashboard/providers/DialogProvider";
-import { useSearch } from "@/app/dashboard/providers/SearchProvider";
-import OmniHelp from "@/app/dashboard/components/OmniHelp";
+import { useDataContext } from "@/app/dashboard/components/providers/DataProvider";
+import Card from "@/app/dashboard/components/ui/cards/CardComponent";
+import { useDialogContext } from "@/app/dashboard/components/providers/DialogProvider";
+import { useSearch } from "@/app/dashboard/components/providers/SearchProvider";
+import OmniHelp from "@/app/dashboard/components/ui/OmniHelp";
 import { Input } from "@/components/ui/input";
 import { Search } from 'lucide-react';
 

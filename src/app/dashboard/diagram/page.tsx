@@ -2,12 +2,12 @@
 
 import React, { useMemo, useState } from "react";
 import { Textarea } from "@/components/ui/textarea";
-import { useDataContext } from "@/app/dashboard/providers/DataProvider";
+import { useDataContext } from "@/app/dashboard/components/providers/DataProvider";
 import MermaidComponent from "@/app/dashboard/diagram/MermaidComponent";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
-import OmniHelp from "@/app/dashboard/components/OmniHelp";
+import OmniHelp from "@/app/dashboard/components/ui/OmniHelp";
 
 const Diagram: React.FC = () => {
   const { cards } = useDataContext();

@@ -1,9 +1,9 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
-import Sidebar from "@/app/dashboard/components/sidebar/Sidebar";
-import { useDataContext } from "@/app/dashboard/providers/DataProvider";
-import { useDialogContext } from "@/app/dashboard/providers/DialogProvider";
-import { createNavigationContext } from "@/app/dashboard/providers/__mocks__/NavigationProviderMocks";
+import Sidebar from "@/app/dashboard/components/ui/sidebar/Sidebar";
+import { useDataContext } from "@/app/dashboard/components/providers/DataProvider";
+import { useDialogContext } from "@/app/dashboard/components/providers/DialogProvider";
+import { createNavigationContext } from "@/app/dashboard/components/providers/__mocks__/NavigationProviderMocks";
 
 jest.mock('@/app/dashboard/providers/DataProvider');
 jest.mock('@/app/dashboard/providers/NavigationProvider');

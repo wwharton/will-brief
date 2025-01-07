@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
-import NewSwimLane from "@/app/dashboard/components/cards/NewSwimLane";
-import { useDataContext } from "@/app/dashboard/providers/DataProvider";
+import NewSwimLane from "@/app/dashboard/components/ui/cards/NewSwimLane";
+import { useDataContext } from "@/app/dashboard/components/providers/DataProvider";
 
 jest.mock('@/app/dashboard/providers/DataProvider');
 

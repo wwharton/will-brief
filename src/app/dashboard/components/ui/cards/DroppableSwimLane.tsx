@@ -1,12 +1,12 @@
 "use client";
 
 import React, { useRef, useEffect, useState } from "react";
-import Swimlane from "@/app/dashboard/components/cards/Swimlane";
+import Swimlane from "@/app/dashboard/components/ui/cards/Swimlane";
 import {
   dropTargetForElements,
 } from "@atlaskit/pragmatic-drag-and-drop/element/adapter";
 import { invariant } from "@/app/utils";
-import { useDataContext } from "@/app/dashboard/providers/DataProvider";
+import { useDataContext } from "@/app/dashboard/components/providers/DataProvider";
 import { isCardData } from "@/app/dashboard/data";
 import { ICard } from "@/app/dashboard/ICard";
 

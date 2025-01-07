@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
-import Card from "@/app/dashboard/components/cards/CardComponent";
+import Card from "@/app/dashboard/components/ui/cards/CardComponent";
 import '@testing-library/jest-dom';
 
 describe("Card", () => {

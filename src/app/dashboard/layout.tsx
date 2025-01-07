@@ -1,11 +1,11 @@
 "use client";
 
 import React from "react";
-import Sidebar from "@/app/dashboard/components/sidebar/Sidebar";
-import { DataProvider } from "@/app/dashboard/providers/DataProvider";
-import { NavigationProvider } from "@/app/dashboard/providers/NavigationProvider";
-import { DialogProvider } from "@/app/dashboard/providers/DialogProvider";
-import { SearchProvider } from "@/app/dashboard/providers/SearchProvider";
+import Sidebar from "@/app/dashboard/components/ui/sidebar/Sidebar";
+import { DataProvider } from "@/app/dashboard/components/providers/DataProvider";
+import { NavigationProvider } from "@/app/dashboard/components/providers/NavigationProvider";
+import { DialogProvider } from "@/app/dashboard/components/providers/DialogProvider";
+import { SearchProvider } from "@/app/dashboard/components/providers/SearchProvider";
 
 interface LayoutProps {
   children: React.ReactNode;

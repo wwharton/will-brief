@@ -10,7 +10,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { useDataContext } from "@/app/dashboard/providers/DataProvider";
+import { useDataContext } from "@/app/dashboard/components/providers/DataProvider";
 import TextEditor from "./editors/TextEditor";
 import SelectEditor from "./editors/SelectEditor";
 import { ICard } from "@/app/dashboard/ICard";

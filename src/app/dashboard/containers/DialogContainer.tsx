@@ -1,8 +1,8 @@
 import React from "react";
-import { useDialogContext } from "@/app/dashboard/providers/DialogProvider";
-import NewCardDialog from "@/app/dashboard/components/dialog/NewCardDialog";
-import UpdateCardDialog from "@/app/dashboard/components/dialog/UpdateCardDialog";
-import DeleteCardDialog from "@/app/dashboard/components/dialog/DeleteCardDialog";
+import { useDialogContext } from "@/app/dashboard/components/providers/DialogProvider";
+import NewCardDialog from "@/app/dashboard/components/ui/dialog/NewCardDialog";
+import UpdateCardDialog from "@/app/dashboard/components/ui/dialog/UpdateCardDialog";
+import DeleteCardDialog from "@/app/dashboard/components/ui/dialog/DeleteCardDialog";
 
 const DialogContainer: React.FC = () => {
   const { dialogState, closeDialog } = useDialogContext();

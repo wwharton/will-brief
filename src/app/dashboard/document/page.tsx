@@ -1,10 +1,10 @@
 "use client";
 
 import React, { useState } from "react";
-import { useDataContext } from "@/app/dashboard/providers/DataProvider";
+import { useDataContext } from "@/app/dashboard/components/providers/DataProvider";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import OmniHelp from "@/app/dashboard/components/OmniHelp";
+import OmniHelp from "@/app/dashboard/components/ui/OmniHelp";
 
 const RenderCategory: React.FC<{ title: string; children: React.ReactNode }> = ({ title, children }) => (
   <div>

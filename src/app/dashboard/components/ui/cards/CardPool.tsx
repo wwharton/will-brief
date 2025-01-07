@@ -1,14 +1,14 @@
 "use client";
 
 import React from "react";
-import { useDataContext } from "@/app/dashboard/providers/DataProvider";
-import DroppableSwimLane from "@/app/dashboard/components/cards/DroppableSwimLane";
-import DraggableCard from "@/app/dashboard/components/cards/DraggableCard";
-import { useNavigationContext } from "@/app/dashboard/providers/NavigationProvider";
-import { useDialogContext } from "@/app/dashboard/providers/DialogProvider";
+import { useDataContext } from "@/app/dashboard/components/providers/DataProvider";
+import DroppableSwimLane from "@/app/dashboard/components/ui/cards/DroppableSwimLane";
+import DraggableCard from "@/app/dashboard/components/ui/cards/DraggableCard";
+import { useNavigationContext } from "@/app/dashboard/components/providers/NavigationProvider";
+import { useDialogContext } from "@/app/dashboard/components/providers/DialogProvider";
 import { ICard } from "@/app/dashboard/ICard";
-import NewSwimLane from "@/app/dashboard/components/cards/NewSwimLane";
-import OmniHelp from "@/app/dashboard/components/OmniHelp";
+import NewSwimLane from "@/app/dashboard/components/ui/cards/NewSwimLane";
+import OmniHelp from "@/app/dashboard/components/ui/OmniHelp";
 
 
 const CardPool: React.FC = () => {

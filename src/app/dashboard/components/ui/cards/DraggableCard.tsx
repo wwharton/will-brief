@@ -3,7 +3,7 @@
 "use client";
 
 import React, { useRef, useEffect, useState } from "react";
-import Card from "@/app/dashboard/components/cards/CardComponent";
+import Card from "@/app/dashboard/components/ui/cards/CardComponent";
 import {
   draggable,
   dropTargetForElements,
@@ -18,7 +18,7 @@ import {
 } from "@atlaskit/pragmatic-drag-and-drop-hitbox/closest-edge";
 import { ICard } from "@/app/dashboard/ICard";
 import { getCardData, isCardData } from "@/app/dashboard/data";
-import { useDataContext } from "@/app/dashboard/providers/DataProvider";
+import { useDataContext } from "@/app/dashboard/components/providers/DataProvider";
 
 interface DraggableCardProps {
   card: ICard;

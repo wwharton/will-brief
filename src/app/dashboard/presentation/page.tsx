@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useMemo, useRef, useCallback } from "react";
-import { useDataContext } from "@/app/dashboard/providers/DataProvider";
+import { useDataContext } from "@/app/dashboard/components/providers/DataProvider";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Maximize2, Minimize2 } from 'lucide-react';
